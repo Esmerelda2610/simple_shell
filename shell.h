@@ -29,6 +29,10 @@ NULL, 0, 0, 0}
 
 #define CONVERT_LCASE 1
 #define CONVERT_UNSGNED 2
+#define APLY_GETLINE 0
+#define APLY_STRTOK 0
+#define FILE_HSTR
+#define MAX_HSTR 4096
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,7 +57,7 @@ typedef struct shll_builtin
 {
 	int (*funct)(data_t *);
 	char *type;
-} shll_builtin_table;
+} tab_shllbuiltin;
 
 /**
  * struct list_str - a singly linked list
@@ -97,11 +101,11 @@ typedef struct shll_data
 	unsigned int line_ct;
 	int envir_chngd;
 	int err_dig;
-	char *environ;
+	char **environ;
 	int line_ctflags;
 	list_t alias;
 	char *pname;
-	list_t hist;
+	list_t *hist;
 	list_t *envir;
 
 	int rd_fd;
@@ -141,11 +145,23 @@ int shll_alias(data_t *data);
 /*variables*/
 void replace_variables(char *command);
 int chain_delim(data_t *data, char *bff, size_t *pd);
+int hsh(data_t *data, char **argvc);
+char **shllget_env(data_t *data);
+void cmd_frk(data_t *data);
+int intchnge_vars(data_t *data);
+int intchnge_str(char **old_str, char *new_str);
+char *set_mem(char *p, char t, unsigned int m);
+void shll_realloc(void *p, unsigned int old, unsigned int new);
+void free_str(char **strs);
+int free_ptr(void **p);
 
 /*comments*/
 void handle_comments(char *command);
 int deci_print(int feed, int fd);
 void detach_comments(char *bff);
+int interactive(data_t *data);
+int is_delim(char c, char *delim);
+int is_alphab(char c);
 
 /*functions*/
 int _sstrlen(char *d);
@@ -164,10 +180,29 @@ void _errputs(char *str);
 int errputchar(char c);
 int _sputs_fd(char c, int fd);
 int _putstrfd(char *str, int fd);
+void cmnd_seek(data_t *data);
+int idf_cmnd(data_t *data, char *path);
+char *path_seek(data_t *data, char *ptstr, char *cmnd);
+char *chardup(char *ptstr, int bgn, int end);
+int atoi_errs(char *str);
+void handle_sigint(__attribute__((unused)) int sig_digi);
+ssize_t get_feed(data_t *data);
+void chk_chain(data_t *data, char *bff, size_t *b, size_t j, size_t length);
+int chng_alias(data_t *data);
+void set_feed(data_t *data, char **argvc);
+void free_feed(data_t *data, int fields);
 
 /*lists*/
 size_t listprnt_str(const list_t *h);
 list_t *adnode(list_t **h, const char *s, int digi);
+int delnode_atindx(list_t **h, unsigned int inx);
+void freelnkd_list(list_t **h_p);
+ssize_t getnode_indx(list_t *h, list_t *nd);
+list_t *initial_node(list_t *nd, char *prx, char t);
+size_t list_prnt(const list_t *head);
+char **convlist_2str(list_t *hd);
+size_t lenof_list(const list_t *head);
+list_t *addnode_atend(list_t **h, const char *s, int dig);
 
 /*enviroment functions*/
 int shll_env(data_t *data);
@@ -180,5 +215,13 @@ char *digit_convrt(long int digi, int nbase, int flgs);
 char **split_str(char *spt, char *dstr);
 char **split_delimstr(char *spt, char *dstr);
 int shll_getline(data_t *data, char **p, size_t *len);
+char **shget_env(data_t *data);
+int shunset_env(data_t *data, char *v);
+int shset_env(data_t *data, char *v, char *val);
+int shll_exit(data_t *data);
+int bltin_seek(data_t *data);
+int shll_cd(data_t *data);
+int shll_hlp(data_t *data);
+int shll_hist(data_t *data);
 
 #endif /*SHLL_H*/

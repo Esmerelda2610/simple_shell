@@ -74,16 +74,6 @@ void shell_loop(void) {
     } while (1);
 }
 
-/**
- * main - entry point
- * @argc: the argument count
- * @argv: the array elements
- * Return: exit success
-*/
-int main(int argc, char **argv) {
-    shell_loop();
-    return EXIT_SUCCESS;
-}
 
 /**
  * deci_print - the function prints a base 10 decimal

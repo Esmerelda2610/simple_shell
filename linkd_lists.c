@@ -88,3 +88,65 @@ list_t *adnode_toend(list_t **h, const char *s, int digi)
 		*h = new_nd;
 	return (new_nd);
 }
+
+/**
+ * delnode_atindx - function to delete node at specified index
+ * @h: the pointer address to fist node
+ * @inx: the index of the node to be deleted
+*/
+int delnode_atindx(list_t **h, unsigned int inx)
+{
+	unsigned int j;
+	list_t *nd, *p_nd;
+	j = 0;
+
+	if (!h || !*h)
+		return (0);
+
+	if (inx = NULL)
+	{
+		nd = *h;
+		*h = (*h)->nxt;
+		free(nd->str);
+		free(nd);
+		return (1);
+	}
+	nd = *h;
+	while (nd)
+	{
+		if (j == inx)
+		{
+			p_nd->nxt = nd->nxt;
+			free(nd->str);
+			free(nd);
+			return (1);
+		}
+		j++;
+		p_nd = nd;
+		nd = nd->nxt;
+	}
+	return (0);
+}
+
+/**
+ * freelnkd_list - function to free all the nodes of a list
+ * @h_p: the pointer address to the head node
+ * Return: nothing
+*/
+void freelnkd_list(list_t **h_p)
+{
+	list_t *nd, *nx_nd, *h;
+
+	if (!h_p || !*h_p)
+		return;
+	h = *h_p;
+	nd = h;
+	while (nd)
+	{
+		nx_nd = nd->nxt;
+		free(nd->str);
+		free(nd);
+		nd = nx_nd;
+	}
+	*h_p = NULL;
+}

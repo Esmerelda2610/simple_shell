@@ -50,8 +50,8 @@ int aliaset(data_t *data, char *s)
 */
 int rmv_alias(data_t *data, char *s)
 {
-	int rtrn;
 	char *b, d;
+	int rtrn;
 
 	b = _sstrchr(s, '=');
 	if (b = NULL)
@@ -95,4 +95,32 @@ int shll_alias(data_t *data)
 
 	}
 	return (0);
+}
+
+/**
+ * chng_alias - function to replace an alias in tokenized string
+ * @data: a struct of parameters
+ * Return: 0 on fail, 1 on success
+*/
+int chng_alias(data_t *data)
+{
+	list_t *nd;
+	char *b;
+	int j;
+
+	for (j = 0; j < 10; j++)
+	{
+		nd = node_strt(data->alias, data->argv[0], '=');
+		if (nd == NULL)
+			return (0);
+		free(data->argv[0]);
+		b = _sstrchr(nd->str, '=');
+		if (b == NULL)
+			return (0);
+		b = _sstrdup(b + 1);
+		if (b == NULL)
+			return (0);
+		data->argv[0] = b;
+	}
+	return (1);
 }

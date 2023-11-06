@@ -83,7 +83,7 @@ int is_delim(char c, char *delim)
 
 int interactive(data_t *data)
 {
-	return (issaty(STDIN_FILENO) && data->read_fd <= 2);
+	return (issaty(STDIN_FILENO) && data->rd_fd <= 2);
 }
 
 /**
