@@ -18,8 +18,9 @@ char **shget_env(data_t *data)
 /**
  * shunset_env - unsets an environment variable
  * @data: a struct of potential arguments
+ * @v: a property of the string environ variable
  * Return: the property of string environ variable
-*/
+ */
 int shunset_env(data_t *data, char *v)
 {
 	char *j;
@@ -64,7 +65,7 @@ int shset_env(data_t *data, char *v, char *val)
 		return (0);
 
 	bff = malloc(_sstrlen(v) + _sstrlen(val) + 2);
-	if (bff = NULL)
+	if (bff == NULL)
 		return (1);
 	_sstrcpy(bff, v);
 	_sstrcat(bff, "=");

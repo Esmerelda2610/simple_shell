@@ -60,7 +60,8 @@ int is_alphab(char c)
  * is_delim - function that checks if character is a delim
  * @delim: the delimeter string
  * @c: the charcter to be checked
-*/
+ * Return: 0 always
+ */
 
 int is_delim(char c, char *delim)
 {

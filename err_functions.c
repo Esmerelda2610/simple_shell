@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * function that prints an input string
+ * _errputs - function that prints an input string
  * @str: the printed input string
  * Return: nada
 */
@@ -59,12 +59,13 @@ int _sputs_fd(char c, int fd)
  * _putstrfd - function that prints an input string
  * @str: string to print
  * @fd: the file descriptor written to
+ * Return: the input string
 */
 int _putstrfd(char *str, int fd)
 {
 	int j;
 
-	if (str = NULL)
+	if (str == NULL)
 		return (0);
 	while (*str)
 	{
@@ -76,9 +77,8 @@ int _putstrfd(char *str, int fd)
 /**
  * err_print - function to print error message
  * @data: struct parameters and return data
- * strerr: the string with specific error type
- * Return: if no numbers or string 0, otherwise converted number
- *   on error -1
+ * @strerr: the string with specific error type
+ * Return: if no numbers or string 0, otherwise converted number on error -1
 */
 void err_print(data_t *data, char *strerr)
 {

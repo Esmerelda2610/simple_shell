@@ -33,9 +33,9 @@ int aliaset(data_t *data, char *s)
 	char *b;
 
 	b = _sstrchr(s, '=');
-	if (b = NULL)
+	if (b == NULL)
 		return (1);
-	if (*++b = NULL)
+	if (*++b == NULL)
 		return (rmv_alias(data, s));
 
 	rmv_alias(data, s);
@@ -54,7 +54,7 @@ int rmv_alias(data_t *data, char *s)
 	int rtrn;
 
 	b = _sstrchr(s, '=');
-	if (b = NULL)
+	if (b == NULL)
 		return (1);
 	d = *b;
 	*b = 0;

@@ -63,6 +63,7 @@ typedef struct shll_builtin
  * struct list_str - a singly linked list
  * @nxt: a pointer to the next node
  * @str: the string
+ * @dig: an integer
 */
 typedef struct list_str
 {
@@ -88,8 +89,10 @@ typedef struct list_str
  * @pname: the filename for the program
  * @hist: the node for history
  * @envir: local copy of environ linked list
- * @read_fd: the line input from which fd is read
+ * @rd_fd: the line input from which fd is read
  * @hist_ct: the number of history line count
+ * @cmdbuff_type: the command type buffer
+ * @cmdbuff: the command buffer
  */
 typedef struct shll_data
 {
@@ -121,7 +124,7 @@ char **split_line(char *line, char *delimiters);
 int command_exists(char *command);
 ssize_t get_line(char **lineptr, size_t *n, int fd);
 void exit_shell(char *command);
-void exit();
+void exit(void);
 void set_env_var(char *variable, char *value);
 void unset_env_var(char *variable);
 void cd_command(char *path);
@@ -130,7 +133,7 @@ void handle_commands(char *commands);
 int execute_comm(char *command);
 void handle_logical_operators(char *commands);
 int main(int argc, char *argv[]);
-void print_env();
+void print_env(void);
 size_t rdbuff(data_t *data, char *buff, size_t *j);
 
 /*aliases*/
@@ -223,5 +226,13 @@ int bltin_seek(data_t *data);
 int shll_cd(data_t *data);
 int shll_hlp(data_t *data);
 int shll_hist(data_t *data);
+
+/*shell history*/
+int hist_wr(data_t *data);
+int hist_rd(data_t *data);
+char *hstfile_ftch(data_t *data);
+int hist_rd(data_t *data);
+int histlist_build(data_t *data, char bf, int cnt_line);
+int hist_recall(data_t *data);
 
 #endif /*SHLL_H*/

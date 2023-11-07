@@ -36,7 +36,7 @@ int hsh(data_t *data, char **argvc)
 	data_free(data, 1);
 	if (!interactive(data) && data->status)
 		exit(data->status);
-	if (ret_bltin = -2)
+	if (ret_bltin == -2)
 	{
 		if (data->err_dig == -1)
 			exit(data->status);
@@ -130,7 +130,7 @@ int shll_cd(data_t *data)
 	if (data->argv[1] == NULL)
 	{
 		d = shll_getenv(data, "HOME=");
-		if (d = NULL)
+		if (d == NULL)
 			retchng_dir =
 			    chdir((d = shll_getenv(data, "PWD=")) ? d : "/");
 		else

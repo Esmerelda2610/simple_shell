@@ -34,7 +34,7 @@ void cmnd_seek(data_t *data)
 	for (j = 0, m = 0; data->arg[j]; j++)
 		if (!is_delim(data->arg[j], "\t\n"))
 			m++;
-	if (m = NULL)
+	if (m == NULL)
 		return;
 	path = seek_path(data, shll_getenv(data, "PATH="), data->argv[0]);
 	if (path != NULL)
@@ -77,6 +77,7 @@ int idf_cmnd(data_t *data, char *path)
  * @data: a struct of data
  * @ptstr: a string of the PATH
  * @cmnd: the command searched for
+ * Return: NULL
 */
 char *path_seek(data_t *data, char *ptstr, char *cmnd)
 {
@@ -118,6 +119,7 @@ char *path_seek(data_t *data, char *ptstr, char *cmnd)
  * @ptstr: the string of the PATH
  * @bgn: the intial index
  * @end: the ending index
+ * Return: the buffer
 */
 char *chardup(char *ptstr, int bgn, int end)
 {

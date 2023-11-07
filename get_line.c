@@ -1,63 +1,11 @@
 #include "shell.h"
 
 /**
- * get_line - gets input form command prompt
- * @lineptr: the input line
- * @n: a pointer to a linked list
- * @fd: the file descriptor
-*/
-ssize_t get_line(char **lineptr, size_t *n, int fd)
-{
-	static char buffer[BUFFER_SIZE];
-	static char *p = buffer;
-	static ssize_t len = 0;
-	ssize_t total = 0;
-	char *newline;
-
-	if (len <= 0)
-	{
-		len = read(fd, buffer, BUFFER_SIZE);
-		if (len <= 0)
-			return len;
-		p = buffer;
-	}
-
-	while ((newline = memchr(p, '\n', len)) == NULL)
-	{
-		if (*n < total + len + 1)
-		{
-			*n = total + len + 1;
-			if ((*lineptr = realloc(*lineptr, *n)) == NULL)
-				return -1;
-		}
-		memcpy(*lineptr + total, p, len);
-		total += len;
-		len = read(fd, buffer, BUFFER_SIZE);
-		if (len <= 0)
-			return len;
-		p = buffer;
-	}
-
-	if (*n < total + (newline - p) + 2)
-	{
-		*n = total + (newline - p) + 2;
-		if ((*lineptr = realloc(*lineptr, *n)) == NULL)
-			return -1;
-	}
-	memcpy(*lineptr + total, p, newline - p + 1);
-	(*lineptr)[total + (newline - p) + 1] = '\0';
-	len -= newline - p + 1;
-	p = newline + 1;
-
-	return total + (newline - p) + 1;
-}
-
-/**
  * split_str - function that splits words from strings
- * 	ignoring repeat delimitors
+ * ignoring repeat delimitors
  * @spt: the string to be split
  * @dstr: a delimitor string
- * Return: pointer to string array, NU;; on fail
+ * Return: pointer to string array, NULL on fail
  */
 char **split_str(char *spt, char *dstr)
 {
@@ -66,7 +14,7 @@ char **split_str(char *spt, char *dstr)
 
 	if (spt == NULL || spt[0] == 0)
 		return (NULL);
-	if (dstr = NULL)
+	if (dstr == NULL)
 		dstr = " ";
 	for (a = 0; spt[a] != '\0'; a++)
 		if (!is_delim(spt[a], dstr) && (is_delim(spt[a + 1], dstr) || !spt[a + 1]))
@@ -75,7 +23,7 @@ char **split_str(char *spt, char *dstr)
 	if (numcnt == 0)
 		return (NULL);
 	p = malloc((1 + numcnt) * sizeof(char *));
-	if (p = NULL)
+	if (p == NULL)
 		return (NULL);
 	for (a = 0, b = 0; b < numcnt; b++)
 	{
@@ -85,7 +33,7 @@ char **split_str(char *spt, char *dstr)
 		while (!is_delim(spt[a + c], dstr) && spt[a + c])
 			c++;
 		p[b] = malloc((c + 1) * sizeof(char));
-		if (p[b] = NULL)
+		if (p[b] == NULL)
 		{
 			for (c = 0; c < b; c++)
 				free(p[c]);
@@ -100,10 +48,10 @@ char **split_str(char *spt, char *dstr)
 }
 
 /**
- * split_str - function that splits words from strings
+ * split_delimstr - function that splits words from strings
  * @spt: the string to be split
  * @dstr: a delimitor string
- * Return: pointer to string array, NU;; on fail
+ * Return: pointer to string array, NULL on fail
  */
 char **split_delimstr(char *spt, char *dstr)
 {
@@ -120,7 +68,7 @@ char **split_delimstr(char *spt, char *dstr)
 	if (numcnt == 0)
 		return (NULL);
 	p = malloc((1 + numcnt) * sizeof(char *));
-	if (p = NULL)
+	if (p == NULL)
 		return (NULL);
 	for (a = 0, b = 0; b < numcnt; b++)
 	{
@@ -130,7 +78,7 @@ char **split_delimstr(char *spt, char *dstr)
 		while (spt[a + c] != dstr && spt[a + c] && spt[a + c] != dstr)
 			c++;
 		p[b] = malloc((c + 1) * sizeof(char));
-		if (p[b] = NULL)
+		if (p[b] == NULL)
 		{
 			for (c = 0; c < b; c++)
 				free(p[c]);
@@ -173,7 +121,7 @@ int shll_getline(data_t *data, char **p, size_t *len)
 	d = _sstrchr(buff + m, '\n');
 	j = d ? 1 + (unsigned int)(d - buff) : lng;
 	neo_b = _srealloc(t, b, b ? b + j : j + 1);
-	if (neo_b = NULL)
+	if (neo_b == NULL)
 		return (t ? free(t), -1 : -1);
 	if (b)
 		_sstrncat(neo_b, buff + m, j - m);

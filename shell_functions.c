@@ -54,7 +54,7 @@ char *pre_substr(const char *str, const char *sub_str)
 }
 
 /**
- * function that concatenates two strings
+ * _sstrcat - function that concatenates two strings
  * @dest: the buffer destination
  * @src: the buffer source
  * Return: a pointer to the buffer destination

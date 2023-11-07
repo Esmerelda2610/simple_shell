@@ -14,7 +14,7 @@ char shll_getenv(data_t *data, const char *nm)
 	while (node)
 	{
 		p = pre_substr(node->str, nm);
-		if (p && *p);
+		if (p && *p)
 			return (p);
 		node = node->nxt;
 	}

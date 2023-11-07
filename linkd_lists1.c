@@ -9,6 +9,7 @@
 ssize_t getnode_indx(list_t *h, list_t *nd)
 {
 	size_t k;
+
 	k = 0;
 
 	while (h != NULL)
@@ -25,11 +26,13 @@ ssize_t getnode_indx(list_t *h, list_t *nd)
  * initial_node - function to return node with string starting with prefix
  * @nd: a pointer to the head of the list
  * @prx: the matching string
+ * @t: character following prefix to match
  * Return: NULL or matching node
 */
 list_t *initial_node(list_t *nd, char *prx, char t)
 {
 	char *d;
+
 	d = NULL;
 
 	while (nd != NULL)
@@ -50,6 +53,7 @@ list_t *initial_node(list_t *nd, char *prx, char t)
 size_t list_prnt(const list_t *head)
 {
 	size_t m;
+
 	m = 0;
 
 	while (head != NULL)
@@ -107,6 +111,7 @@ char **convlist_2str(list_t *hd)
 size_t lenof_list(const list_t *head)
 {
 	size_t k;
+
 	k = 0;
 
 	while (head != NULL)

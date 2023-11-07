@@ -8,6 +8,7 @@
 void set_feed(data_t *data, char **argvc)
 {
 	int j;
+
 	j = 0;
 
 	data->pname = argvc[0];
@@ -78,6 +79,7 @@ void clear_feed(data_t *data)
  * @h: head node pointer's address
  * @s: the node field string
  * @dig: an index of the node in history
+ * Return: the address of the new node
 */
 list_t *addnode_atend(list_t **h, const char *s, int dig)
 {
@@ -88,7 +90,7 @@ list_t *addnode_atend(list_t **h, const char *s, int dig)
 
 	nd = *h;
 	new = malloc(sizeof(list_t));
-	if (new = NULL)
+	if (new == NULL)
 		return (NULL);
 	set_mem((void *)new, 0, sizeof(list_t));
 	new->dig = dig;

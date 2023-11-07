@@ -1,81 +1,6 @@
 #include "shell.h"
 
 /**
- * split - splits a string
- * @line: the string to be split
- * Return: the tokens of the split string
-*/
-char **split(char *line) {
-    int bufsize = MAX_LINE, position = 0;
-    char **tokens = malloc(bufsize * sizeof(char*));
-    char *token;
-
-    if (!tokens) {
-        fprintf(stderr, "Allocation error\n");
-        exit(EXIT_FAILURE);
-    }
-
-    token = strtok(line, DELIMITERS);
-    while (token != NULL) {
-        tokens[position] = token;
-        position++;
-
-        if (position >= bufsize) {
-            bufsize += MAX_LINE;
-            tokens = realloc(tokens, bufsize * sizeof(char*));
-            if (!tokens) {
-                fprintf(stderr, "Allocation error\n");
-                exit(EXIT_FAILURE);
-            }
-        }
-
-        token = strtok(NULL, DELIMITERS);
-    }
-    tokens[position] = NULL;
-    return tokens;
-}
-
-/**
- * shell_loop - loops the terminal cursor
- * Return: nothing
-*/
-void shell_loop(void) {
-    char *line;
-    char **args;
-    int status;
-
-    do {
-        printf("> ");
-        line = malloc(MAX_LINE * sizeof(char));
-        fgets(line, MAX_LINE, stdin);
-        args = split(line);
-
-        pid_t pid, wpid;
-        pid = fork();
-
-        if (pid == 0) {
-            // Child process
-            if (execvp(args[0], args) == -1) {
-                perror("Error");
-            }
-            exit(EXIT_FAILURE);
-        } else if (pid < 0) {
-            // Error forking
-            perror("Error");
-        } else {
-            // Parent process
-            do {
-                wpid = waitpid(pid, &status, WUNTRACED);
-            } while (!WIFEXITED(status) && !WIFSIGNALED(status));
-        }
-
-        free(line);
-        free(args);
-    } while (1);
-}
-
-
-/**
  * deci_print - the function prints a base 10 decimal
  * @feed: the user input
  * @fd: a file descriptor written to
@@ -114,7 +39,7 @@ int deci_print(int feed, int fd)
 }
 
 /**
- * digit_convert - an itoa clone that converts numbers
+ * digit_convrt - an itoa clone that converts numbers
  * @digi: a digit
  * @nbase: the base
  * @flgs: the flags

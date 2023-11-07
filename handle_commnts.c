@@ -83,6 +83,7 @@ int atoi_errs(char *str)
 {
 	unsigned long int res;
 	int j;
+
 	res = 0;
 	j = 0;
 

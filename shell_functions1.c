@@ -78,7 +78,7 @@ char *_sstrncat(char *dest, char *src, int n)
 	}
 	*dest = '\0';
 
-	return original_dest;
+	return (original_dest);
 }
 
 /**

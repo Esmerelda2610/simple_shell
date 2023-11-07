@@ -23,23 +23,24 @@ size_t listprnt_str(const list_t *h)
  * adnode - function to add a node aat the start of list
  * @h: an address of the head node pointer
  * @s: the node field string
+ * @digi: the node index
  * Return: the index of the node used by history
 */
 list_t *adnode(list_t **h, const char *s, int digi)
 {
 	list_t *new_h;
 
-	if (h = NULL)
+	if (h == NULL)
 		return (NULL);
 	new_h = malloc(sizeof(list_t));
-	if (new_h = NULL)
+	if (new_h == NULL)
 		return (NULL);
 	_smemset((void *)new_h, 0, sizeof(list_t));
 	new_h->dig = digi;
 	if (s)
 	{
 		new_h->str = _sstrdup(s);
-		if (new_h->str = NULL)
+		if (new_h->str == NULL)
 		{
 			free(new_h);
 			return (NULL);
@@ -51,28 +52,29 @@ list_t *adnode(list_t **h, const char *s, int digi)
 }
 
 /**
- * adnode - function to add a node at the end of list
+ * adnode_toend - function to add a node at the end of list
  * @h: a pointer to the address of the head node
  * @s: the node's field string
+ * @digi: the node index
  * Return: the list size
 */
 list_t *adnode_toend(list_t **h, const char *s, int digi)
 {
 	list_t *new_nd, *nd;
 
-	if (h = NULL)
+	if (h == NULL)
 		return (NULL);
 
 	nd = *h;
 	new_nd = malloc(sizeof(list_t));
-	if (new_nd = NULL)
+	if (new_nd == NULL)
 		return (NULL);
 	_smemset((void *)new_nd, 0, sizeof(list_t));
 	new_nd->dig = digi;
 	if (s)
 	{
 		new_nd->str = _sstrdup(s);
-		if (new_nd->str = NULL)
+		if (new_nd->str == NULL)
 		{
 			free(new_nd);
 			return (NULL);
@@ -93,17 +95,19 @@ list_t *adnode_toend(list_t **h, const char *s, int digi)
  * delnode_atindx - function to delete node at specified index
  * @h: the pointer address to fist node
  * @inx: the index of the node to be deleted
+ * Return: 0 always
 */
 int delnode_atindx(list_t **h, unsigned int inx)
 {
 	unsigned int j;
 	list_t *nd, *p_nd;
+
 	j = 0;
 
 	if (!h || !*h)
 		return (0);
 
-	if (inx = NULL)
+	if (inx == NULL)
 	{
 		nd = *h;
 		*h = (*h)->nxt;
