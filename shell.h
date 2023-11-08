@@ -149,87 +149,48 @@ int _sputchar(char c);
 char *_sstrncat(char *dest, char *src, int n);
 char *_sstrncpy(char *dest, char *src, int n);
 
-/*aliases*/
-int alias_prnt(list_t *node);
-int aliaset(data_t *data, char *s);
-int rmv_alias(data_t *data, char *s);
+/*string tokenizers*/
+char *_sstrchr(char *s, char c);
+char **split_str(char *spt, char *dstr);
+char **split_delimstr(char *spt, char dstr);
+
+/*shell memory*/
+char *set_mem(char *p, char t, unsigned int m);
+void free_str(char **strs);
+void *shll_realloc(void *p, unsigned int old, unsigned int new);
+int free_ptr(void **p);
+
+/*handle strings*/
+int interactive(data_t *data);
+int is_delim(char c, char *delim);
+int is_alphab(char c);
+int str_to_int(char *s);
+
+/*handle args*/
+int atoi_errs(char *strn);
+void err_print(data_t *data, char *strerr);
+int deci_print(int feed, int fd);
+char *digit_convrt(long int digi, int nbase, int flgs);
+void detach_comments(char *bff);
+
+/*shell builtins*/
+int shll_exit(data_t *data);
+int shll_cd(data_t *data);
+int shll_hlp(data_t *data);
+int shll_hist(data_t *data);
 int shll_alias(data_t *data);
-int chng_alias(data_t *data);
 
-/*change directory*/
-void set_feed(data_t *data, char **argvc);
-void free_feed(data_t *data, int fields);
-void clear_feed(data_t *data);
-
-/*command args*/
-
-ssize_t get_feed(data_t *data);
-void chk_chain(data_t *data, char *bff, size_t *b, size_t j, size_t length);
-
-
-
-/*exit args*/
+/*shell getline*/
 ssize_t buffeed(data_t *data, char **bff, size_t *length);
 ssize_t get_feed(data_t *data);
 ssize_t bufread(data_t *data, char *bff, size_t *j);
 int shll_getline(data_t *data, char **p, size_t *len);
 void handle_sigint(__attribute__((unused)) int sig_digi);
 
-/*exit shell*/
-int shll_exit(data_t *data);
-int shll_cd(data_t *data);
-int shll_hlp(data_t *data);
-
-/*get line*/
-char **split_str(char *spt, char *dstr);
-char **split_delimstr(char *spt, char dstr);
-int shll_getline(data_t *data, char **p, size_t *len);
-size_t rdbuff(data_t *data, char *buff, size_t *j);
-
-/*handle args*/
-void err_print(data_t *data, char *strerr);
-int deci_print(int feed, int fd);
-char *digit_convrt(long int digi, int nbase, int flgs);
-
-/*handle comments*/
-char *set_mem(char *p, char t, unsigned int m);
-void *shll_realloc(void *p, unsigned int old, unsigned int new);
-void free_str(char **strs);
-int free_ptr(void **p);
-int atoi_errs(char *str);
-
-/*handle log op*/
-int shll_hist(data_t *data);
-
-/*handle vars*/
-void detach_comments(char *bff);
-int chain_delim(data_t *data, char *bff, size_t *pd);
-int intchnge_vars(data_t *data);
-int intchnge_str(char **old_str, char *new_str);
-
-
-
-/*linked lists*/
-size_t listprnt_str(const list_t *h);
-list_t *adnode(list_t **h, const char *s, int digi);
-list_t *adnode_atend(list_t **h, const char *s, int digi);
-int delnode_atindx(list_t **h, unsigned int inx);
-void freelnkd_list(list_t **h_p);
-
-/*linked lists 1*/
-ssize_t getnode_indx(list_t *h, list_t *nd);
-list_t *initial_node(list_t *nd, char *prx, char t);
-size_t list_prnt(const list_t *head);
-char **convlist_2str(list_t *hd);
-size_t lenof_list(const list_t *head);
-
-/*main*/
-/*int main(int arc, char **arv);*/
-
-/*print env*/
-char **shget_env(data_t *data);
-int shunset_env(data_t *data, char *v);
-int shset_env(data_t *data, char *v, char *val);
+/*handle input*/
+void set_feed(data_t *data, char **argvc);
+void free_feed(data_t *data, int fields);
+void clear_feed(data_t *data);
 
 /*set unset env*/
 char *shll_getenv(data_t *data, const char *nm);
@@ -238,22 +199,44 @@ int shll_setenv(data_t *data);
 int envlist_populate(data_t *data);
 int shllunset_env(data_t *data);
 
-
-
-
-
-/*shell function 2*/
-int str_to_int(char *s);
-int is_alphab(char c);
-int is_delim(char c, char *delim);
-int interactive(data_t *data);
-char *_sstrchr(char *s, char c);
+/*print env*/
+char **shget_env(data_t *data);
+int shunset_env(data_t *data, char *v);
+int shset_env(data_t *data, char *v, char *val);
 
 /*shell hist*/
+char *hstfile_ftch(data_t *data);
 int hist_wr(data_t *data);
 int hist_rd(data_t *data);
-char *hstfile_ftch(data_t *data);
 int histlist_build(data_t *data, char *bf, int cnt_line);
 int hist_recall(data_t *data);
+
+/*linked lists*/
+list_t *adnode(list_t **h, const char *s, int digi);
+list_t *adnode_atend(list_t **h, const char *s, int digi);
+size_t listprnt_str(const list_t *h);
+int delnode_atindx(list_t **h, unsigned int inx);
+void freelnkd_list(list_t **h_p);
+
+/*linked lists 1*/
+size_t lenof_list(const list_t *head);
+char **convlist_2str(list_t *hd);
+size_t list_prnt(const list_t *head);
+list_t *initial_node(list_t *nd, char *prx, char t);
+ssize_t getnode_indx(list_t *h, list_t *nd);
+
+/*handle vars*/
+int chain_delim(data_t *data, char *bff, size_t *pd);
+void chk_chain(data_t *data, char *bff, size_t *b, size_t j, size_t length);
+int chng_alias(data_t *data);
+int intchnge_vars(data_t *data);
+int intchnge_str(char **old_str, char *new_str);
+
+/*aliases*/
+int alias_prnt(list_t *node);
+int aliaset(data_t *data, char *s);
+int rmv_alias(data_t *data, char *s);
+int shll_alias(data_t *data);
+int chng_alias(data_t *data);
 
 #endif /*SHLL_H*/

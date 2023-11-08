@@ -17,10 +17,26 @@ char *set_mem(char *p, char t, unsigned int m)
 }
 
 /**
+ * free_str - function to free a main string
+ * @strs: the main string
+ */
+void free_str(char **strs)
+{
+	char **j = strs;
+
+	if (strs == NULL)
+		return;
+	while (strs != NULL)
+		free(*strs);
+	free(j);
+}
+
+/**
  * shll_realloc - function to reallocate memory block
  * @p: a pointer to older malloc'ed memory block
  * @old: the byte size of of previous block
  * @new: the byte size of the new memory block
+ * Return: a pointer to the previous memory block
 */
 void *shll_realloc(void *p, unsigned int old, unsigned int new)
 {
@@ -45,21 +61,6 @@ void *shll_realloc(void *p, unsigned int old, unsigned int new)
 }
 
 /**
- * free_str - function to free a main string
- * @strs: the main string
-*/
-void free_str(char **strs)
-{
-	char **j = strs;
-
-	if (strs == NULL)
-		return;
-	while (strs != NULL)
-		free(*strs);
-	free(j);
-}
-
-/**
  * free_ptr - function to free a pointer and NULL the address
  * @p: the address of the free'd pointer
  * Return: if successful 1, 0 otherwise
@@ -75,32 +76,3 @@ int free_ptr(void **p)
 	return (0);
 }
 
-/**
- * atoi_errs - function to convert integer fromstring
- * @str: the converted string
- * Return: if no numbers in string 0, on fail -1
-*/
-int atoi_errs(char *str)
-{
-	unsigned long int res;
-	int j;
-
-	res = 0;
-	j = 0;
-
-	if (*str == '+')
-		str++;
-	for (j = 0; str[j] != '\0'; j++)
-	{
-		if (str[j] >= '0' && str[j] <= '9')
-		{
-			res *= 10;
-			res += (str[j] - '0');
-			if (res > INT_MAX)
-				return (-1);
-		}
-		else
-			return (-1);
-	}
-	return (res);
-}

@@ -2,7 +2,7 @@
 
 /**
  * _sstrdup - function that duplicates a string
- * @str: the string to be duplicated
+ * @s: the string to be duplicated
  * Return: a pointer to the string dulicated
 */
 

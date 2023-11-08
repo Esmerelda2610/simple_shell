@@ -63,7 +63,8 @@ int bltin_seek(data_t *data)
 	    {"help", shll_hlp},
 	    {"history", shll_hist},
 	    {"alias", shll_alias},
-	    {NULL, NULL}};
+	    {NULL, NULL}
+	};
 
 	for (j = 0; bltin_tbl[j].type; j++)
 		if (_sstrcmp(data->argv[0], bltin_tbl[j].type) == 0)
@@ -115,12 +116,13 @@ void cmnd_seek(data_t *data)
 	}
 }
 
+
+
 /**
  * cmd_frk - function to fork an execute thread
  * @data: a struct of parameters
  * Return: void
 */
-
 void cmd_frk(data_t *data)
 {
 	pid_t pid_ch;
@@ -154,5 +156,3 @@ void cmd_frk(data_t *data)
 		}
 	}
 }
-
-

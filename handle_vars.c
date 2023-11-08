@@ -1,23 +1,6 @@
 #include "shell.h"
 
 /**
- * detach_comments - replaces the first instance of # with \0
- * @bff: the address of string to modify
- * Return: 0 always
-*/
-void detach_comments(char *bff)
-{
-	int j;
-
-	for (j = 0; bff[j] != '\0'; j++)
-		if (bff[j] == '#' && (!j || bff[j - 1] == ' '))
-		{
-			bff[j] = '\0';
-			break;
-		}
-}
-
-/**
  * chain_delim - function to test if char in chain is a delimitor
  * @data: a struct of parameters
  * @bff: the buffer of the character
@@ -48,6 +31,67 @@ int chain_delim(data_t *data, char *bff, size_t *pd)
 	else
 		return (0);
 	*pd = k;
+	return (1);
+}
+
+/**
+ * chk_chain - checks based on last status
+ * @data: a struct of parameters
+ * @bff: a buffer for the character
+ * @b: the buffer's current position address
+ * @j: the initial position in the buffer
+ * @length: the buffer length
+ */
+void chk_chain(data_t *data, char *bff, size_t *b, size_t j, size_t length)
+{
+	size_t k;
+
+	k = *b;
+
+	if (data->cmdbuff_type == CMMND_AND)
+	{
+		if (data->status)
+		{
+			bff[j] = 0;
+			k = length;
+		}
+	}
+	if (data->cmdbuff_type == CMMND_OR)
+	{
+		if (!data->status)
+		{
+			bff[j] = 0;
+			k = length;
+		}
+	}
+	*b = k;
+}
+
+/**
+ * chng_alias - replaces alias in tokenized string
+ * @data: a struct of parameters
+ * Return: if replaced 1, otherwise 0
+*/
+int chng_alias(data_t *data)
+{
+	list_t *nd;
+	char *b;
+	int j;
+
+	for (j = 0; j < 10; j++)
+	{
+		nd = initial_node(data->alias, data->argv[0], '=');
+		if (nd == NULL)
+			return (0);
+		free(data->argv[0]);
+		b = _sstrchr(nd->str, '=');
+		if (b == NULL)
+			return (0);
+		b = _sstrdup(b + 1);
+		if (b == NULL)
+			return (0);
+		data->argv[0] = b;
+	}
 	return (1);
 }
 

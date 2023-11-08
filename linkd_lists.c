@@ -1,25 +1,6 @@
 #include "shell.h"
 
 /**
- * listprnt_str - function that prints str element of a list_t linked list
- * @h: a pointer to the first node
- * Return: the size of the list
-*/
-size_t listprnt_str(const list_t *h)
-{
-	size_t j = 0;
-
-	while (h)
-	{
-		_sputs(h->str ? h->str : "(nil)");
-		_sputs("\n");
-		h = h->nxt;
-		j++;
-	}
-	return (j);
-}
-
-/**
  * adnode - function to add a node aat the start of list
  * @h: an address of the head node pointer
  * @s: the node field string
@@ -89,6 +70,25 @@ list_t *adnode_atend(list_t **h, const char *s, int digi)
 	else
 		*h = new_nd;
 	return (new_nd);
+}
+
+/**
+ * listprnt_str - function that prints str element of a list_t linked list
+ * @h: a pointer to the first node
+ * Return: the size of the list
+ */
+size_t listprnt_str(const list_t *h)
+{
+	size_t j = 0;
+
+	while (h)
+	{
+		_sputs(h->str ? h->str : "(nil)");
+		_sputs("\n");
+		h = h->nxt;
+		j++;
+	}
+	return (j);
 }
 
 /**

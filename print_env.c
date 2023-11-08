@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * shllget_env - function to return string array copy of environ
+ * shget_env - function to return string array copy of environ
  * @data: a struct of potential arguments
  * Return: 0 always
  */

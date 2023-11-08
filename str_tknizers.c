@@ -1,6 +1,25 @@
 #include "shell.h"
 
 /**
+ * _sstrchr - finds a character in a string
+ * @s: the string searched
+ * @c: the character searched for
+ * Return: NULL
+ */
+char *_sstrchr(char *s, char c)
+{
+	while (*s)
+	{
+		if (*s == c)
+		{
+			return (s);
+		}
+		s++;
+	}
+	return (NULL);
+}
+
+/**
  * split_str - function that splits words from strings
  * ignoring repeat delimitors
  * @spt: the string to be split

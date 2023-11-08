@@ -9,6 +9,7 @@
 int _sstrlen(char *d)
 {
 	int length = 0;
+
 	if (!d)
 		return (0);
 	while (*d++)

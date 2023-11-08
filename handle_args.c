@@ -1,6 +1,33 @@
 #include "shell.h"
 
 /**
+ * atoi_errs - function that converts string to integer
+ * @strn: the converted string
+ * Return: if no numbers 0, otherwise -1
+*/
+int atoi_errs(char *strn)
+{
+	unsigned long int res = 0;
+	int k = 0;
+
+	if (*strn == '+')
+		strn++;
+	for (k = 0; strn[k] != '\0'; k++)
+	{
+		if (strn[k] >= '0' && strn[k] <= '9')
+		{
+			res *= 10;
+			res += (strn[k] - '0');
+			if (res > INT_MAX)
+				return (-1);
+		}
+		else
+			return (-1);
+	}
+	return (res);
+}
+
+/**
  * err_print - function to print error message
  * @data: struct parameters and return data
  * @strerr: the string with specific error type
@@ -87,4 +114,21 @@ char *digit_convrt(long int digi, int nbase, int flgs)
 	if (sgn)
 		*--ptr = sgn;
 	return (ptr);
+}
+
+/**
+ * detach_comments - replaces the first instance of # with \0
+ * @bff: the address of string to modify
+ * Return: 0 always
+ */
+void detach_comments(char *bff)
+{
+	int j;
+
+	for (j = 0; bff[j] != '\0'; j++)
+		if (bff[j] == '#' && (!j || bff[j - 1] == ' '))
+		{
+			bff[j] = '\0';
+			break;
+		}
 }

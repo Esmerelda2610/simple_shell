@@ -91,3 +91,46 @@ int shll_hlp(data_t *data)
 		_sputs(*arr_arg);
 	return (0);
 }
+
+/**
+ * shll_hist - function to display the shell history
+ * @data: a struct of potential arguments
+ * Return: 0 always
+ */
+int shll_hist(data_t *data)
+{
+	list_prnt(data->hist);
+	return (0);
+}
+
+/**
+ * shll_alias - functions similar to the alias built-in
+ * @data: a struct of potential arguments
+ * Return: 0 always
+ */
+int shll_alias(data_t *data)
+{
+	int j = 0;
+	char *t = NULL;
+	list_t *node = NULL;
+
+	if (data->argc == 1)
+	{
+		node = data->alias;
+		while (node)
+		{
+			alias_prnt(node);
+			node = node->nxt;
+		}
+		return (0);
+	}
+	for (j = 1; data->argv[j]; j++)
+	{
+		t = _sstrchr(data->argv[j], '=');
+		if (t)
+			aliaset(data, data->argv[j]);
+		else
+			alias_prnt(initial_node(data->alias, data->argv[j], '='));
+	}
+	return (0);
+}

@@ -1,6 +1,28 @@
 #include "shell.h"
 
 /**
+ * hstfile_ftch - fetches the history file
+ * @data: a struct of parameters
+ * Return: history file in an allocated string
+ */
+char *hstfile_ftch(data_t *data)
+{
+	char *bf, *d;
+
+	d = shll_getenv(data, "HOME=");
+	if (d == NULL)
+		return (NULL);
+	bf = malloc(sizeof(char) * (_sstrlen(d) + _sstrlen(FILE_HSTR) + 2));
+	if (bf == NULL)
+		return (NULL);
+	bf[0] = 0;
+	_sstrcpy(bf, d);
+	_sstrcat(bf, "/");
+	_sstrcat(bf, FILE_HSTR);
+	return (bf);
+}
+
+/**
  * hist_wr - function to create file or append to file
  * @data: a struct of parameters
  * Return: -1 on error, 1 on success
@@ -76,27 +98,7 @@ int hist_rd(data_t *data)
 	return (data->hist_ct);
 }
 
-/**
- * hstfile_ftch - fetches the history file
- * @data: a struct of parameters
- * Return: history file in an allocated string
-*/
-char *hstfile_ftch(data_t *data)
-{
-	char *bf, *d;
 
-	d = shll_getenv(data, "HOME=");
-	if (d == NULL)
-		return (NULL);
-	bf = malloc(sizeof(char) * (_sstrlen(d) + _sstrlen(FILE_HSTR) + 2));
-	if (bf == NULL)
-		return (NULL);
-	bf[0] = 0;
-	_sstrcpy(bf, d);
-	_sstrcat(bf, "/");
-	_sstrcat(bf, FILE_HSTR);
-	return (bf);
-}
 
 /**
  * histlist_build - function to add an entry to a hist linked list
