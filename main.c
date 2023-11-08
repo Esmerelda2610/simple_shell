@@ -8,7 +8,7 @@
 */
 int main(int arc, char **arv)
 {
-	data_t *data[] = {DATA_INIT};
+	data_t data[] = { DATA_INIT };
 	int f = 2;
 
 	asm("mov %1, %0\n\t"

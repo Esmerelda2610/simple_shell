@@ -6,17 +6,23 @@
  * Return: a pointer to the string dulicated
 */
 
-char *_sstrdup(const char *str)
+char *_sstrdup(const char *s)
 {
-	char *dup = malloc((_sstrlen(str) + 1) * sizeof(char));
+	char *dup;
+	int lng = 0;
 
-	if (dup == NULL)
-	{
-		printf("Error: Unable to allocate memory for string duplication.\n");
+	if (s == NULL)
 		return (NULL);
-	}
+	while (*s++)
+		lng++;
+	dup = malloc(sizeof(char) * (lng + 1));
 
-	_sstrcpy(dup, str);
+	if (!dup)
+		return (NULL);
+
+	for (lng++; lng--;)
+		dup[lng] = *--s;
+	return (dup);
 
 	return (dup);
 }

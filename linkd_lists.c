@@ -35,7 +35,7 @@ list_t *adnode(list_t **h, const char *s, int digi)
 	new_h = malloc(sizeof(list_t));
 	if (new_h == NULL)
 		return (NULL);
-	_smemset((void *)new_h, 0, sizeof(list_t));
+	set_mem((void *)new_h, 0, sizeof(list_t));
 	new_h->dig = digi;
 	if (s)
 	{
@@ -58,7 +58,7 @@ list_t *adnode(list_t **h, const char *s, int digi)
  * @digi: the node index
  * Return: the list size
 */
-list_t *adnode_toend(list_t **h, const char *s, int digi)
+list_t *adnode_atend(list_t **h, const char *s, int digi)
 {
 	list_t *new_nd, *nd;
 
@@ -69,7 +69,7 @@ list_t *adnode_toend(list_t **h, const char *s, int digi)
 	new_nd = malloc(sizeof(list_t));
 	if (new_nd == NULL)
 		return (NULL);
-	_smemset((void *)new_nd, 0, sizeof(list_t));
+	set_mem((void *)new_nd, 0, sizeof(list_t));
 	new_nd->dig = digi;
 	if (s)
 	{
@@ -107,7 +107,7 @@ int delnode_atindx(list_t **h, unsigned int inx)
 	if (!h || !*h)
 		return (0);
 
-	if (inx == NULL)
+	if (!inx)
 	{
 		nd = *h;
 		*h = (*h)->nxt;

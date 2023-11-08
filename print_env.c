@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * shget_env - it eturns environ's string array copy
+ * shllget_env - function to return string array copy of environ
  * @data: a struct of potential arguments
  * Return: 0 always
-*/
+ */
 char **shget_env(data_t *data)
 {
 	if (!data->environ || data->envir_chngd)
@@ -83,7 +83,7 @@ int shset_env(data_t *data, char *v, char *val)
 		}
 		nde = nde->nxt;
 	}
-	adnode_toend(&(data->envir), bff, 0);
+	adnode_atend(&(data->envir), bff, 0);
 	free(bff);
 	data->envir_chngd = 1;
 	return (0);

@@ -53,7 +53,7 @@ char **split_str(char *spt, char *dstr)
  * @dstr: a delimitor string
  * Return: pointer to string array, NULL on fail
  */
-char **split_delimstr(char *spt, char *dstr)
+char **split_delimstr(char *spt, char dstr)
 {
 	char **p;
 	int a, b, c, d, numcnt = 0;
@@ -62,7 +62,7 @@ char **split_delimstr(char *spt, char *dstr)
 		return (NULL);
 	for (a = 0; spt[a] != '\0'; a++)
 		if ((spt[a] != dstr && spt[a + 1] == dstr) ||
-		 spt[a] != dstr && !spt[a + 1] || spt[a + 1] == dstr)
+		 (spt[a] != dstr && !spt[a + 1]) || spt[a + 1] == dstr)
 			numcnt++;
 
 	if (numcnt == 0)
@@ -93,66 +93,3 @@ char **split_delimstr(char *spt, char *dstr)
 	return (p);
 }
 
-/**
- * shll_getline - retrieves next line from standard input
- * @data: a struct of parameters
- * @p: a preallocated or NULL pointer's buffer address
- * @len: the preallocated ptr buffer size
- * Return: b
-*/
-int shll_getline(data_t *data, char **p, size_t *len)
-{
-	size_t j;
-	size_t a = 0, b = 0;
-	static size_t m, lng;
-	static char buff[RD_BUFF_SIZE];
-	char *t = NULL, *neo_b = NULL, *d;
-
-	t = *p;
-	if (t && lng)
-		b = *len;
-	if (m == lng)
-		m = lng = 0;
-
-	a = rdbuff(data, buff, &lng);
-	if (a == -1 || (a == 0 && lng == 0))
-		return (-1);
-
-	d = _sstrchr(buff + m, '\n');
-	j = d ? 1 + (unsigned int)(d - buff) : lng;
-	neo_b = _srealloc(t, b, b ? b + j : j + 1);
-	if (neo_b == NULL)
-		return (t ? free(t), -1 : -1);
-	if (b)
-		_sstrncat(neo_b, buff + m, j - m);
-	else
-		_sstrncpy(neo_b, buff + m, j - m + 1);
-
-	b += j - m;
-	m = j;
-	t = neo_b;
-
-	if (len)
-		*len = b;
-	*p = t;
-	return (b);
-}
-
-/**
- * rdbuff - function tha reads a buffer
- * @data: a struct of parameters
- * @buff: the buffer
- * @j: the size
- * Return: rd
-*/
-size_t rdbuff(data_t *data, char *buff, size_t *j)
-{
-	ssize_t rd = 0;
-
-	if (*j != NULL)
-		return (0);
-	rd = read(data->rd_fd, buff, RD_BUFF_SIZE);
-	if (rd >= 0)
-		*j = rd;
-	return (rd);
-}

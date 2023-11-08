@@ -11,7 +11,7 @@ int hist_wr(data_t *data)
 	list_t *nd = NULL;
 	ssize_t fdsp;
 
-	if (fname == NULL)
+	if (!fname)
 		return (-1);
 
 	fdsp = open(fname, O_CREAT | O_TRUNC | O_RDWR, 0644);
@@ -23,7 +23,7 @@ int hist_wr(data_t *data)
 		_putstrfd(nd->str, fdsp);
 		_sputs_fd('\n', fdsp);
 	}
-	_putstrfd(BUFF_FLUSH, fdsp);
+	_sputs_fd(BUFF_FLUSH, fdsp);
 	close(fdsp);
 	return (1);
 }
@@ -38,7 +38,7 @@ int hist_rd(data_t *data)
 	struct stat st;
 	ssize_t fdsp, lenrd, flsz = 0;
 	int j, fin = 0, line_cnt = 0;
-	char *bf = NULL, *fname = hist_ftch(data);
+	char *bf = NULL, *fname = hstfile_ftch(data);
 
 	if (fname == NULL)
 		return (0);
@@ -105,13 +105,13 @@ char *hstfile_ftch(data_t *data)
  * @cnt_line: the count of lines
  * Return: 0 always
 */
-int histlist_build(data_t *data, char bf, int cnt_line)
+int histlist_build(data_t *data, char *bf, int cnt_line)
 {
 	list_t *nd = NULL;
 
 	if (data->hist)
 		nd = data->hist;
-	addnode_atend(&nd, bf, cnt_line);
+	adnode_atend(&nd, bf, cnt_line);
 
 	if (data->hist == NULL)
 		data->hist = nd;

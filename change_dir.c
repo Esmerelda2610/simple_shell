@@ -45,7 +45,7 @@ void free_feed(data_t *data, int fields)
 	data->path = NULL;
 	if (fields)
 	{
-		if (data->cmdbuff_type == NULL)
+		if (data->cmdbuff == NULL)
 			free(data->arg);
 		if (data->envir)
 			freelnkd_list(&(data->envir));
@@ -71,45 +71,5 @@ void clear_feed(data_t *data)
 	data->arg = NULL;
 	data->argv = NULL;
 	data->path = NULL;
-	data->argc = NULL;
-}
-
-/**
- * addnode_atend - attaches a new node at the nd of list
- * @h: head node pointer's address
- * @s: the node field string
- * @dig: an index of the node in history
- * Return: the address of the new node
-*/
-list_t *addnode_atend(list_t **h, const char *s, int dig)
-{
-	list_t *new, *nd;
-
-	if (h == NULL)
-		return (NULL);
-
-	nd = *h;
-	new = malloc(sizeof(list_t));
-	if (new == NULL)
-		return (NULL);
-	set_mem((void *)new, 0, sizeof(list_t));
-	new->dig = dig;
-	if (s != NULL)
-	{
-		new->str = _sstrdup(s);
-		if (new->str == NULL)
-		{
-			free(new);
-			return (NULL);
-		}
-	}
-	if (nd != NULL)
-	{
-		while (nd->nxt)
-			nd = nd->nxt;
-		nd->nxt = new;
-	}
-	else
-		*h = new;
-	return (new);
+	data->argc = 0;
 }

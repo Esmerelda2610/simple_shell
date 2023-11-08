@@ -6,7 +6,7 @@
  * @nm: the env variable name
  * Return: value of env variable
 */
-char shll_getenv(data_t *data, const char *nm)
+char *shll_getenv(data_t *data, const char *nm)
 {
 	list_t *node = data->envir;
 	char *p;
@@ -45,7 +45,7 @@ int shll_setenv(data_t *data)
 		_errputs("Improper number of arguments!\n");
 		return (1);
 	}
-	if (_setenv(data, data->argv[1], data->argv[2]))
+	if (shset_env(data, data->argv[1], data->argv[2]))
 		return (0);
 	return (1);
 }
@@ -61,7 +61,7 @@ int envlist_populate(data_t *data)
 	list_t *node = NULL;
 
 	for (j = 0; environ[j]; j++)
-		addnode_atend(&node, environ[j], 0);
+		adnode_atend(&node, environ[j], 0);
 	data->envir = node;
 	return (0);
 }
@@ -81,7 +81,7 @@ int shllunset_env(data_t *data)
 		return (1);
 	}
 	for (j = 1; j <= data->argc; j++)
-		_unsetenv(data, data->argv[j]);
+		shunset_env(data, data->argv[j]);
 
 	return (0);
 }

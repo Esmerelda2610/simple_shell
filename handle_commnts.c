@@ -22,13 +22,13 @@ char *set_mem(char *p, char t, unsigned int m)
  * @old: the byte size of of previous block
  * @new: the byte size of the new memory block
 */
-void shll_realloc(void *p, unsigned int old, unsigned int new)
+void *shll_realloc(void *p, unsigned int old, unsigned int new)
 {
 	char *pns;
 
-	if (p == NULL)
+	if (!p)
 		return (malloc(new));
-	if (new == NULL)
+	if (!new)
 		return (free(p), NULL);
 	if (new == old)
 		return (p);
@@ -72,6 +72,7 @@ int free_ptr(void **p)
 		*p = NULL;
 		return (1);
 	}
+	return (0);
 }
 
 /**

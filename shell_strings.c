@@ -9,11 +9,11 @@
 int _sstrlen(char *d)
 {
 	int length = 0;
-
-	while (*d != '\0')
+	if (!d)
+		return (0);
+	while (*d++)
 	{
 		length++;
-		d++;
 	}
 	return (length);
 }
@@ -46,11 +46,9 @@ int _sstrcmp(char *str1, char *str2)
 char *pre_substr(const char *str, const char *sub_str)
 {
 	while (*sub_str)
-	{
 		if (*sub_str++ != *str++)
 			return (NULL);
-		return ((char *)str);
-	}
+	return ((char *)str);
 }
 
 /**
@@ -85,9 +83,10 @@ char *_sstrcpy(char *dest, char *src)
 
 	while (*src != '\0')
 	{
-		*ptr = '\0';
-
-		return (dest);
+		*ptr++ = *src++;
 	}
+	*ptr = '\0';
+
+	return (dest);
 }
 
