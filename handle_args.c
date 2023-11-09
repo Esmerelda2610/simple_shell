@@ -91,11 +91,11 @@ int deci_print(int feed, int fd)
  */
 char *digit_convrt(long int digi, int nbase, int flgs)
 {
-	char *ptr;
-	char sgn = 0;
 	static char *arr;
-	unsigned long n = digi;
 	static char buf[50];
+	unsigned long n = digi;
+	char sgn = 0;
+	char *p;
 
 	if (!(flgs & CONVERT_UNSGNED) && digi < 0)
 	{
@@ -103,17 +103,17 @@ char *digit_convrt(long int digi, int nbase, int flgs)
 		sgn = '-';
 	}
 	arr = flgs & CONVERT_LCASE ? "0123456789abcdef" : "0123456789ABCDEF";
-	ptr = &buf[49];
-	*ptr = '\0';
+	p = &buf[49];
+	*p = '\0';
 
 	do {
-		*--ptr = arr[n % nbase];
+		*--p = arr[n % nbase];
 		n /= nbase;
 	} while (n != 0);
 
 	if (sgn)
-		*--ptr = sgn;
-	return (ptr);
+		*--p = sgn;
+	return (p);
 }
 
 /**

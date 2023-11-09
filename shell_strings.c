@@ -29,12 +29,17 @@ int _sstrlen(char *d)
 
 int _sstrcmp(char *str1, char *str2)
 {
-	while (*str1 && (*str1 == *str2))
+	while (*str1 && *str2)
 	{
+		if (*str1 != *str2)
+			return (*str1 - *str2);
 		str1++;
 		str2++;
 	}
-	return (*(unsigned char *)str1 - *(unsigned char *)str2);
+	if (*str1 == *str2)
+		return (0);
+	else
+		return (*str1 < *str2 ? -1 : 1);
 }
 
 /**
@@ -59,16 +64,16 @@ char *pre_substr(const char *str, const char *sub_str)
  * Return: a pointer to the buffer destination
 */
 
-char *_sstrcat(char *dest, char *src)
+char *_sstrcat(char *des, char *src)
 {
-	char *ptr = dest + _sstrlen(dest);
+	char *ptr = des;
 
-	while (*src != '\0')
-		*ptr++ = *src++;
-
-	*ptr = '\0';
-
-	return (dest);
+	while (*des)
+		des++;
+	while (*src)
+		*des++ = *src++;
+	*des = *src;
+	return (ptr);
 }
 
 /**
@@ -78,16 +83,18 @@ char *_sstrcat(char *dest, char *src)
  * Return: a pointer to the buffer destination
 */
 
-char *_sstrcpy(char *dest, char *src)
+char *_sstrcpy(char *des, char *sce)
 {
-	char *ptr = dest;
+	int j = 0;
 
-	while (*src != '\0')
+	if (des == sce || sce == 0)
+		return (des);
+	while (sce[j])
 	{
-		*ptr++ = *src++;
+		des[j] = sce[j];
+		j++;
 	}
-	*ptr = '\0';
+	des[j] = 0;
 
-	return (dest);
+	return (des);
 }
-

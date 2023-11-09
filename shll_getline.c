@@ -67,7 +67,7 @@ ssize_t get_feed(data_t *data)
 		{
 			if (chain_delim(data, buff, &m))
 				break;
-			k++;
+			m++;
 		}
 		k = m + 1;
 		if (k >= length)

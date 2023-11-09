@@ -130,24 +130,24 @@ char *chardup(char *ptstr, int bgn, int end);
 char *path_seek(data_t *data, char *ptstr, char *cmnd);
 
 /*error functions*/
-void _errputs(char *str);
+void _errputs(char *s);
 int errputchar(char c);
 int _sputs_fd(char c, int fd);
-int _putstrfd(char *str, int fd);
+int _putstrfd(char *s, int fd);
 
 /*shell strings*/
 int _sstrlen(char *d);
 int _sstrcmp(char *str1, char *str2);
 char *pre_substr(const char *str, const char *sub_str);
-char *_sstrcat(char *dest, char *src);
-char *_sstrcpy(char *dest, char *src);
+char *_sstrcat(char *des, char *src);
+char *_sstrcpy(char *des, char *sce);
 
 /*shell strings 1*/
 char *_sstrdup(const char *s);
-void _sputs(char *str);
+void _sputs(char *s);
 int _sputchar(char c);
-char *_sstrncat(char *dest, char *src, int n);
-char *_sstrncpy(char *dest, char *src, int n);
+char *_sstrncpy(char *des, char *src, int n);
+char *_sstrncat(char *dst, char *sce, int n);
 
 /*string tokenizers*/
 char *_sstrchr(char *s, char c);
@@ -163,7 +163,7 @@ int free_ptr(void **p);
 /*handle strings*/
 int interactive(data_t *data);
 int is_delim(char c, char *delim);
-int is_alphab(char c);
+int is_alphab(int c);
 int str_to_int(char *s);
 
 /*handle args*/

@@ -24,10 +24,10 @@ void free_str(char **strs)
 {
 	char **j = strs;
 
-	if (strs == NULL)
+	if (!strs)
 		return;
-	while (strs != NULL)
-		free(*strs);
+	while (*strs)
+		free(*strs++);
 	free(j);
 }
 
@@ -50,7 +50,7 @@ void *shll_realloc(void *p, unsigned int old, unsigned int new)
 		return (p);
 
 	pns = malloc(new);
-	if (pns == NULL)
+	if (!pns)
 		return (NULL);
 
 	old = old < new ? old : new;

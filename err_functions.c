@@ -2,15 +2,19 @@
 
 /**
  * _errputs - function that prints an input string
- * @str: the printed input string
+ * @s: the printed input string
  * Return: nada
 */
-void _errputs(char *str)
+void _errputs(char *s)
 {
-	while (*str)
+	int k = 0;
+
+	if (!s)
+		return;
+	while (s[k] != '\0')
 	{
-		write(1, str, 1);
-		str++;
+		_sputchar(s[k]);
+		s++;
 	}
 }
 
@@ -61,15 +65,15 @@ int _sputs_fd(char c, int fd)
  * @fd: the file descriptor written to
  * Return: the input string
 */
-int _putstrfd(char *str, int fd)
+int _putstrfd(char *s, int fd)
 {
 	int j;
 
-	if (str == NULL)
+	if (!s)
 		return (0);
-	while (*str)
+	while (*s)
 	{
-		j += _sputs_fd(*str++, fd);
+		j += _sputs_fd(*s++, fd);
 	}
 	return (j);
 }

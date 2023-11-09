@@ -22,11 +22,10 @@ int is_delim(char c, char *delim)
 {
 	while (*delim)
 	{
-		if (c == *delim)
+		if (*delim++ == c)
 		{
 			return (1);
 		}
-		delim++;
 	}
 	return (0);
 }
@@ -37,7 +36,7 @@ int is_delim(char c, char *delim)
  * Return: 1 if is an alphabet, otherwise 0
  */
 
-int is_alphab(char c)
+int is_alphab(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 	{
@@ -57,32 +56,32 @@ int is_alphab(char c)
 
 int str_to_int(char *s)
 {
-	int result = 0;
-	bool isNegative = false;
+	unsigned int rst = 0;
+	int j, flg = 0, sn = 1, opt;
 
-	if (*s == '-')
+	for (j = 0; s[j] != '\0' && flg != 2; j++)
 	{
-		isNegative = true;
-		s++;
-	}
+		if (s[j] == '-')
+			sn *= -1;
 
-	while (*s)
-	{
-		if (*s >= '0' && *s <= '9')
+		if (s[j] >= '0' && s[j] <= '9')
 		{
-			result = result * 10 + (*s - '0');
+			flg = 1;
+			rst *= 10;
+			rst += (s[j] - '0');
 		}
-		else
-		{
-			break;
-		}
-		s++;
+		else if (flg == 1)
+			flg = 2;
 	}
 
-	if (isNegative)
+	if (sn == -1)
 	{
-		result = -result;
+		opt = -rst;
+	}
+	else
+	{
+		opt = rst;
 	}
 
-	return (result);
+	return (opt);
 }
