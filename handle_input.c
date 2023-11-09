@@ -1,6 +1,18 @@
 #include "shell.h"
 
 /**
+ * clear_feed - function to initialize the data_t struct
+ * @data: the address of the struct
+ */
+void clear_feed(data_t *data)
+{
+	data->arg = NULL;
+	data->argv = NULL;
+	data->path = NULL;
+	data->argc = 0;
+}
+
+/**
  * set_feed - function to initialize the data struct
  * @data: the address of the struct
  * @argvc: an argument vector
@@ -45,7 +57,7 @@ void free_feed(data_t *data, int fields)
 	data->path = NULL;
 	if (fields)
 	{
-		if (data->cmdbuff == NULL)
+		if (!data->cmdbuff)
 			free(data->arg);
 		if (data->envir)
 			freelnkd_list(&(data->envir));
@@ -55,21 +67,9 @@ void free_feed(data_t *data, int fields)
 			freelnkd_list(&(data->alias));
 		free_str(data->environ);
 			data->environ = NULL;
-			free_ptr((void **)data->cmdbuff);
+		free_ptr((void **)data->cmdbuff);
 		if (data->rd_fd > 2)
 			close(data->rd_fd);
 		_sputchar(BUFF_FLUSH);
 	}
-}
-
-/**
- * clear_feed - function to initialize the data_t struct
- * @data: the address of the struct
-*/
-void clear_feed(data_t *data)
-{
-	data->arg = NULL;
-	data->argv = NULL;
-	data->path = NULL;
-	data->argc = 0;
 }

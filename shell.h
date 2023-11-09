@@ -188,9 +188,9 @@ int shll_getline(data_t *data, char **p, size_t *len);
 void handle_sigint(__attribute__((unused)) int sig_digi);
 
 /*handle input*/
+void clear_feed(data_t *data);
 void set_feed(data_t *data, char **argvc);
 void free_feed(data_t *data, int fields);
-void clear_feed(data_t *data);
 
 /*set unset env*/
 char *shll_getenv(data_t *data, const char *nm);

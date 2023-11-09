@@ -155,6 +155,6 @@ int shll_getline(data_t *data, char **p, size_t *len)
 void handle_sigint(__attribute__((unused)) int sig_digi)
 {
 	_sputs("\n");
-	_sputs("$ ");
+	_sputs("Liz&Josh$ ");
 	_sputchar(BUFF_FLUSH);
 }

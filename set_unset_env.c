@@ -8,15 +8,15 @@
 */
 char *shll_getenv(data_t *data, const char *nm)
 {
-	list_t *node = data->envir;
-	char *p;
+	list_t *nod = data->envir;
+	char *b;
 
-	while (node)
+	while (nod)
 	{
-		p = pre_substr(node->str, nm);
-		if (p && *p)
-			return (p);
-		node = node->nxt;
+		b = pre_substr(nod->str, nm);
+		if (b && *b)
+			return (b);
+		nod = nod->nxt;
 	}
 	return (NULL);
 }
