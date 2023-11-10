@@ -56,8 +56,8 @@ int is_alphab(int c)
 
 int str_to_int(char *s)
 {
-	unsigned int rst = 0;
 	int j, flg = 0, sn = 1, opt;
+	unsigned int rst = 0;
 
 	for (j = 0; s[j] != '\0' && flg != 2; j++)
 	{

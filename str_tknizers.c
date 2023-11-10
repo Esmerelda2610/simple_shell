@@ -73,8 +73,8 @@ char **split_str(char *spt, char *dstr)
  */
 char **split_delimstr(char *spt, char dstr)
 {
-	char **p;
 	int a, b, c, d, numcnt = 0;
+	char **p;
 
 	if (spt == NULL || spt[0] == 0)
 		return (NULL);

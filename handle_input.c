@@ -19,15 +19,13 @@ void clear_feed(data_t *data)
 */
 void set_feed(data_t *data, char **argvc)
 {
-	int j;
-
-	j = 0;
+	int j = 0;
 
 	data->pname = argvc[0];
 	if (data->arg)
 	{
-		data->argv = split_str(data->arg, "\t");
-		if (data->argv == NULL)
+		data->argv = split_str(data->arg, " \t");
+		if (!data->argv)
 		{
 			data->argv = malloc(sizeof(char *) * 2);
 			if (data->argv)
@@ -40,8 +38,8 @@ void set_feed(data_t *data, char **argvc)
 			;
 		data->argc = j;
 
-		intchnge_vars(data);
 		chng_alias(data);
+		intchnge_vars(data);
 	}
 }
 

@@ -178,6 +178,11 @@ int shll_exit(data_t *data);
 int shll_cd(data_t *data);
 int shll_hlp(data_t *data);
 int shll_hist(data_t *data);
+
+/*aliases*/
+int rmv_alias(data_t *data, char *s);
+int aliaset(data_t *data, char *s);
+int alias_prnt(list_t *node);
 int shll_alias(data_t *data);
 
 /*shell getline*/
@@ -231,12 +236,5 @@ void chk_chain(data_t *data, char *bff, size_t *b, size_t j, size_t length);
 int chng_alias(data_t *data);
 int intchnge_vars(data_t *data);
 int intchnge_str(char **old_str, char *new_str);
-
-/*aliases*/
-int alias_prnt(list_t *node);
-int aliaset(data_t *data, char *s);
-int rmv_alias(data_t *data, char *s);
-int shll_alias(data_t *data);
-int chng_alias(data_t *data);
 
 #endif /*SHLL_H*/

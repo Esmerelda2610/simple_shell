@@ -82,4 +82,3 @@ char *path_seek(data_t *data, char *ptstr, char *cmnd)
 	}
 	return (NULL);
 }
-

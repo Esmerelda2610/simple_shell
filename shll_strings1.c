@@ -104,9 +104,11 @@ char *_sstrncpy(char *des, char *src, int n)
  */
 char *_sstrncat(char *dst, char *sce, int n)
 {
-	int k = 0, m = 0;
+	int k, m;
 	char *original_dest = dst;
 
+	k = 0;
+	m = 0;
 	while (dst[k] != '\0')
 	{
 		k++;

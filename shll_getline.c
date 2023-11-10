@@ -9,8 +9,8 @@
 */
 ssize_t buffeed(data_t *data, char **bff, size_t *length)
 {
-	size_t ln_p = 0;
 	size_t m = 0;
+	size_t ln_p = 0;
 
 	if (!*length)
 	{
@@ -48,10 +48,10 @@ ssize_t buffeed(data_t *data, char **bff, size_t *length)
  */
 ssize_t get_feed(data_t *data)
 {
-	static size_t k, m, length;
 	static char *buff;
-	char **buffp = &(data->arg), *b;
+	static size_t k, m, length;
 	ssize_t n = 0;
+	char **buffp = &(data->arg), *b;
 
 	_sputchar(BUFF_FLUSH);
 	n = buffeed(data, &buff, &length);

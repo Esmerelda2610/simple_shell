@@ -7,8 +7,8 @@
 */
 int atoi_errs(char *strn)
 {
-	unsigned long int res = 0;
 	int k = 0;
+	unsigned long int res = 0;
 
 	if (*strn == '+')
 		strn++;
@@ -52,9 +52,9 @@ void err_print(data_t *data, char *strerr)
  */
 int deci_print(int feed, int fd)
 {
+	int (*__sputchar)(char) = _sputchar;
 	int j, cnt = 0;
 	unsigned int _abs_, curr;
-	int (*__sputchar)(char) = _sputchar;
 
 	if (fd == STDERR_FILENO)
 		__sputchar = errputchar;
@@ -93,9 +93,9 @@ char *digit_convrt(long int digi, int nbase, int flgs)
 {
 	static char *arr;
 	static char buf[50];
-	unsigned long n = digi;
 	char sgn = 0;
 	char *p;
+	unsigned long n = digi;
 
 	if (!(flgs & CONVERT_UNSGNED) && digi < 0)
 	{

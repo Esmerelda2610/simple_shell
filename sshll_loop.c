@@ -15,7 +15,7 @@ int hsh(data_t *data, char **argvc)
 	{
 		clear_feed(data);
 		if (interactive(data))
-			_sputs("#Liz&Josh$ ");
+			_sputs("#\033[1;34mLiznJoshell\033[0m$ ");
 		errputchar(BUFF_FLUSH);
 		m = get_feed(data);
 		if (m != -1)
