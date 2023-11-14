@@ -7,9 +7,11 @@
 */
 int atoi_errs(char *strn)
 {
-	int k = 0;
-	unsigned long int res = 0;
+	int k;
+	unsigned long int res;
 
+	res = 0;
+	k = 0;
 	if (*strn == '+')
 		strn++;
 	for (k = 0; strn[k] != '\0'; k++)
@@ -53,11 +55,14 @@ void err_print(data_t *data, char *strerr)
 int deci_print(int feed, int fd)
 {
 	int (*__sputchar)(char) = _sputchar;
-	int j, cnt = 0;
+	int j, cnt;
 	unsigned int _abs_, curr;
 
+	cnt = 0;
 	if (fd == STDERR_FILENO)
+	{
 		__sputchar = errputchar;
+	}
 	if (feed < 0)
 	{
 		_abs_ = -feed;
@@ -65,7 +70,9 @@ int deci_print(int feed, int fd)
 		cnt++;
 	}
 	else
+	{
 		_abs_ = feed;
+	}
 	curr = _abs_;
 	for (j = 1000000000; j > 1; j /= 10)
 	{
@@ -91,12 +98,14 @@ int deci_print(int feed, int fd)
  */
 char *digit_convrt(long int digi, int nbase, int flgs)
 {
+	char *p;
+	char sgn;
+	unsigned long n;
 	static char *arr;
 	static char buf[50];
-	char sgn = 0;
-	char *p;
-	unsigned long n = digi;
 
+	n = digi;
+	sgn = 0;
 	if (!(flgs & CONVERT_UNSGNED) && digi < 0)
 	{
 		n = -digi;
@@ -112,7 +121,9 @@ char *digit_convrt(long int digi, int nbase, int flgs)
 	} while (n != 0);
 
 	if (sgn)
+	{
 		*--p = sgn;
+	}
 	return (p);
 }
 
@@ -126,7 +137,7 @@ void detach_comments(char *bff)
 	int j;
 
 	for (j = 0; bff[j] != '\0'; j++)
-		if (bff[j] == '#' && (!j || bff[j - 1] == ' '))
+		if ((!j || bff[j - 1] == ' ') && bff[j] == '#')
 		{
 			bff[j] = '\0';
 			break;

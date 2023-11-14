@@ -9,8 +9,9 @@
 int main(int arc, char **arv)
 {
 	data_t data[] = { DATA_INIT };
-	int f = 2;
+	int f;
 
+	f = 2;
 	asm("mov %1, %0\n\t"
 	    "add $3, %0"
 	    : "=r" (f)
@@ -22,7 +23,9 @@ int main(int arc, char **arv)
 		if (f == -1)
 		{
 			if (errno == EACCES)
+			{
 				exit(126);
+			}
 			if (errno == ENOENT)
 			{
 				_errputs(arv[0]);

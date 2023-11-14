@@ -38,12 +38,12 @@ int shll_cd(data_t *data)
 	int retchng_dir;
 
 	p = getcwd(buf, 1024);
-	if (!p)
+	if (p == NULL)
 		_sputs("cwd failure msg\n");
 	if (!data->argv[1])
 	{
 		d = shll_getenv(data, "HOME=");
-		if (!d)
+		if (d == NULL)
 			retchng_dir =
 			    chdir((d = shll_getenv(data, "PWD=")) ? d : "/");
 		else
@@ -51,7 +51,7 @@ int shll_cd(data_t *data)
 	}
 	else if (_sstrcmp(data->argv[1], "-") == 0)
 	{
-		if (!shll_getenv(data, "OLDPWD="))
+		if (shll_getenv(data, "OLDPWD=") == NULL)
 		{
 			_sputs(p);
 			_sputchar('\n');
@@ -88,7 +88,9 @@ int shll_hlp(data_t *data)
 	arr_arg = data->argv;
 	_sputs("Implementing help function");
 	if (0)
+	{
 		_sputs(*arr_arg);
+	}
 	return (0);
 }
 

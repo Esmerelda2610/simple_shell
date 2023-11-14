@@ -42,20 +42,28 @@ void *shll_realloc(void *p, unsigned int old, unsigned int new)
 {
 	char *pns;
 
-	if (!p)
+	if (p == NULL)
+	{
 		return (malloc(new));
+	}
 	if (!new)
+	{
 		return (free(p), NULL);
+	}
 	if (new == old)
 		return (p);
 
 	pns = malloc(new);
-	if (!pns)
+	if (pns == NULL)
+	{
 		return (NULL);
+	}
 
 	old = old < new ? old : new;
 	while (old--)
+	{
 		pns[old] = ((char *)p)[old];
+	}
 	free(p);
 	return (pns);
 }
@@ -67,7 +75,7 @@ void *shll_realloc(void *p, unsigned int old, unsigned int new)
 */
 int free_ptr(void **p)
 {
-	if (p && *p)
+	if (p != NULL && *p)
 	{
 		free(*p);
 		*p = NULL;

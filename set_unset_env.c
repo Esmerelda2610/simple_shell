@@ -11,11 +11,13 @@ char *shll_getenv(data_t *data, const char *nm)
 	list_t *nod = data->envir;
 	char *b;
 
-	while (nod)
+	while (nod != NULL)
 	{
 		b = pre_substr(nod->str, nm);
-		if (b && *b)
+		if (b != NULL && *b)
+		{
 			return (b);
+		}
 		nod = nod->nxt;
 	}
 	return (NULL);
@@ -46,7 +48,9 @@ int shll_setenv(data_t *data)
 		return (1);
 	}
 	if (shset_env(data, data->argv[1], data->argv[2]))
+	{
 		return (0);
+	}
 	return (1);
 }
 
@@ -61,7 +65,9 @@ int envlist_populate(data_t *data)
 	list_t *node = NULL;
 
 	for (j = 0; environ[j]; j++)
+	{
 		adnode_atend(&node, environ[j], 0);
+	}
 	data->envir = node;
 	return (0);
 }

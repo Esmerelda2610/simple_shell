@@ -38,7 +38,7 @@ int is_delim(char c, char *delim)
 
 int is_alphab(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 	{
 		return (1);
 	}
@@ -56,9 +56,12 @@ int is_alphab(int c)
 
 int str_to_int(char *s)
 {
-	int j, flg = 0, sn = 1, opt;
-	unsigned int rst = 0;
+	int j, flg, sn, opt;
+	unsigned int rst;
 
+	flg = 0;
+	sn = 1;
+	rst = 0;
 	for (j = 0; s[j] != '\0' && flg != 2; j++)
 	{
 		if (s[j] == '-')
@@ -71,9 +74,10 @@ int str_to_int(char *s)
 			rst += (s[j] - '0');
 		}
 		else if (flg == 1)
+		{
 			flg = 2;
+		}
 	}
-
 	if (sn == -1)
 	{
 		opt = -rst;
@@ -82,6 +86,5 @@ int str_to_int(char *s)
 	{
 		opt = rst;
 	}
-
 	return (opt);
 }

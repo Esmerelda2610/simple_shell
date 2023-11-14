@@ -59,7 +59,7 @@ char *pre_substr(const char *str, const char *sub_str)
 
 /**
  * _sstrcat - function that concatenates two strings
- * @dest: the buffer destination
+ * @des: the buffer destination
  * @src: the buffer source
  * Return: a pointer to the buffer destination
 */
@@ -78,8 +78,8 @@ char *_sstrcat(char *des, char *src)
 
 /**
  * _sstrcpy - function that copies a string
- * @dest: the buffer destination
- * @src: the buffer source
+ * @des: the buffer destination
+ * @sce: the buffer source
  * Return: a pointer to the buffer destination
 */
 

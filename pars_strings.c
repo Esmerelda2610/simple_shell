@@ -12,7 +12,9 @@ int idf_cmnd(data_t *data, char *path)
 
 	(void)data;
 	if (!path || stat(path, &st))
+	{
 		return (0);
+	}
 
 	if (st.st_mode & __S_IFREG)
 	{
@@ -32,11 +34,17 @@ int idf_cmnd(data_t *data, char *path)
 char *chardup(char *ptstr, int bgn, int end)
 {
 	static char buffer[1024];
-	int j = 0, m = 0;
+	int j, m;
 
+	m = 0;
+	j = 0;
 	for (m = 0, j = bgn; j < end; j++)
+	{
 		if (ptstr[j] != ':')
+		{
 			buffer[m++] = ptstr[j];
+		}
+	}
 	buffer[m] = 0;
 	return (buffer);
 }
@@ -50,15 +58,21 @@ char *chardup(char *ptstr, int bgn, int end)
 */
 char *path_seek(data_t *data, char *ptstr, char *cmnd)
 {
-	int k = 0, cmd_pos = 0;
+	int k, cmd_pos;
 	char *path;
 
-	if (!ptstr)
+	cmd_pos = 0;
+	k = 0;
+	if (ptstr == NULL)
+	{
 		return (NULL);
+	}
 	if ((_sstrlen(cmnd) > 2) && pre_substr(cmnd, "./"))
 	{
 		if (idf_cmnd(data, cmnd))
+		{
 			return (cmnd);
+		}
 	}
 	while (1)
 	{
@@ -66,7 +80,9 @@ char *path_seek(data_t *data, char *ptstr, char *cmnd)
 		{
 			path = chardup(ptstr, cmd_pos, k);
 			if (!*path)
+			{
 				_sstrcat(path, cmnd);
+			}
 			else
 			{
 				_sstrcat(path, "/");

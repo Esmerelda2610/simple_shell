@@ -19,8 +19,9 @@ void clear_feed(data_t *data)
 */
 void set_feed(data_t *data, char **argvc)
 {
-	int j = 0;
+	int j;
 
+	j = 0;
 	data->pname = argvc[0];
 	if (data->arg)
 	{

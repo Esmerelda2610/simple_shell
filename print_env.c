@@ -23,9 +23,9 @@ char **shget_env(data_t *data)
  */
 int shunset_env(data_t *data, char *v)
 {
-	char *j;
-	size_t k;
 	list_t *nd = data->envir;
+	size_t k;
+	char *j;
 
 	k = 0;
 
@@ -65,13 +65,13 @@ int shset_env(data_t *data, char *v, char *val)
 		return (0);
 
 	bff = malloc(_sstrlen(v) + _sstrlen(val) + 2);
-	if (bff == NULL)
+	if (!bff)
 		return (1);
 	_sstrcpy(bff, v);
 	_sstrcat(bff, "=");
 	_sstrcat(bff, val);
 	nde = data->envir;
-	while (nde != NULL)
+	while (!nde)
 	{
 		b = pre_substr(nde->str, v);
 		if (b && *b == '=')

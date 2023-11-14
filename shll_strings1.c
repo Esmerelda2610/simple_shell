@@ -9,19 +9,28 @@
 char *_sstrdup(const char *s)
 {
 	char *dup;
-	int lgth = 0;
+	int lgth;
 
+	lgth = 0;
 	if (s == NULL)
+	{
 		return (NULL);
+	}
 	while (*s++)
+	{
 		lgth++;
+	}
 	dup = malloc(sizeof(char) * (lgth + 1));
 
-	if (!dup)
+	if (dup == NULL)
+	{
 		return (NULL);
+	}
 
 	for (lgth++; lgth--;)
+	{
 		dup[lgth] = *--s;
+	}
 	return (dup);
 }
 
@@ -33,10 +42,13 @@ char *_sstrdup(const char *s)
 
 void _sputs(char *s)
 {
-	int k = 0;
+	int k;
 
-	if (!s)
+	k = 0;
+	if (s == NULL)
+	{
 		return;
+	}
 	while (s[k] != '\0')
 	{
 		_sputchar(s[k]);
@@ -55,13 +67,15 @@ int _sputchar(char c)
 	static int j;
 	static char buff[WRT_BUFF_SIZE];
 
-	if (c == BUFF_FLUSH || j >= WRT_BUFF_SIZE)
+	if (j >= WRT_BUFF_SIZE || c == BUFF_FLUSH)
 	{
 		write(1, buff, j);
 		j = 0;
 	}
 	if (c != BUFF_FLUSH)
+	{
 		buff[j++] = c;
+	}
 	return (1);
 }
 
@@ -97,8 +111,8 @@ char *_sstrncpy(char *des, char *src, int n)
 
 /**
  * _sstrncat - concatenates two strings
- * @dest: the first string
- * @src: the second string
+ * @dst: the first string
+ * @sce: the second string
  * @n: number of bytes used
  * Return: the strings that have been concatenated
  */

@@ -8,12 +8,14 @@
  */
 int rmv_alias(data_t *data, char *s)
 {
-	char *b, d;
 	int rtrn;
+	char *b, d;
 
 	b = _sstrchr(s, '=');
-	if (!b)
+	if (b == NULL)
+	{
 		return (1);
+	}
 	d = *b;
 	*b = 0;
 	rtrn = delnode_atindx(&(data->alias),
@@ -33,11 +35,14 @@ int aliaset(data_t *data, char *s)
 	char *b;
 
 	b = _sstrchr(s, '=');
-	if (!b)
+	if (b == NULL)
+	{
 		return (1);
-	if (!*++b)
+	}
+	if (!++b)
+	{
 		return (rmv_alias(data, s));
-
+	}
 	rmv_alias(data, s);
 	return (adnode_atend(&(data->alias), s, 0) == NULL);
 }
@@ -51,11 +56,13 @@ int alias_prnt(list_t *node)
 {
 	char *d = NULL, *e = NULL;
 
-	if (node)
+	if (node != NULL)
 	{
 		d = _sstrchr(node->str, '=');
 		for (e = node->str; e <= d; e++)
+		{
 			_sputchar(*e);
+		}
 		_sputchar('\'');
 		_sputs(d + 1);
 		_sputs("'\n");
@@ -71,10 +78,11 @@ int alias_prnt(list_t *node)
  */
 int shll_alias(data_t *data)
 {
-	int j = 0;
 	char *t = NULL;
 	list_t *node = NULL;
+	int j;
 
+	j = 0;
 	if (data->argc == 1)
 	{
 		node = data->alias;
@@ -89,9 +97,13 @@ int shll_alias(data_t *data)
 	{
 		t = _sstrchr(data->argv[j], '=');
 		if (t)
+		{
 			aliaset(data, data->argv[j]);
+		}
 		else
+		{
 			alias_prnt(initial_node(data->alias, data->argv[j], '='));
+		}
 	}
 	return (0);
 }

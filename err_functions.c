@@ -7,10 +7,13 @@
 */
 void _errputs(char *s)
 {
-	int k = 0;
+	int k;
 
-	if (!s)
+	k = 0;
+	if (s == NULL)
+	{
 		return;
+	}
 	while (s[k] != '\0')
 	{
 		_sputchar(s[k]);
@@ -25,8 +28,8 @@ void _errputs(char *s)
 */
 int errputchar(char c)
 {
-	static int j;
 	static char buff[WRT_BUFF_SIZE];
+	static int j;
 
 	if (c == BUFF_FLUSH || j >= WRT_BUFF_SIZE)
 	{
@@ -34,7 +37,9 @@ int errputchar(char c)
 		j = 0;
 	}
 	if (c != BUFF_FLUSH)
+	{
 		buff[j++] = c;
+	}
 	return (1);
 }
 
@@ -46,8 +51,8 @@ int errputchar(char c)
 */
 int _sputs_fd(char c, int fd)
 {
-	static int j;
 	static char buff[WRT_BUFF_SIZE];
+	static int j;
 
 	if (c == BUFF_FLUSH || j >= WRT_BUFF_SIZE)
 	{
@@ -55,13 +60,15 @@ int _sputs_fd(char c, int fd)
 		j = 0;
 	}
 	if (c != BUFF_FLUSH)
+	{
 		buff[j++] = c;
+	}
 	return (1);
 }
 
 /**
  * _putstrfd - function that prints an input string
- * @str: string to print
+ * @s: string to print
  * @fd: the file descriptor written to
  * Return: the input string
 */
@@ -69,8 +76,10 @@ int _putstrfd(char *s, int fd)
 {
 	int j;
 
-	if (!s)
+	if (s == NULL)
+	{
 		return (0);
+	}
 	while (*s)
 	{
 		j += _sputs_fd(*s++, fd);

@@ -11,10 +11,14 @@ char *hstfile_ftch(data_t *data)
 
 	d = shll_getenv(data, "HOME=");
 	if (d == NULL)
+	{
 		return (NULL);
+	}
 	bf = malloc(sizeof(char) * (_sstrlen(d) + _sstrlen(FILE_HSTR) + 2));
 	if (bf == NULL)
+	{
 		return (NULL);
+	}
 	bf[0] = 0;
 	_sstrcpy(bf, d);
 	_sstrcat(bf, "/");
@@ -29,17 +33,21 @@ char *hstfile_ftch(data_t *data)
 */
 int hist_wr(data_t *data)
 {
+	ssize_t fdsp;
 	char *fname = hstfile_ftch(data);
 	list_t *nd = NULL;
-	ssize_t fdsp;
 
-	if (!fname)
+	if (fname == NULL)
+	{
 		return (-1);
+	}
 
 	fdsp = open(fname, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(fname);
 	if (fdsp == -1)
+	{
 		return (-1);
+	}
 	for (nd = data->hist; nd; nd = nd->nxt)
 	{
 		_putstrfd(nd->str, fdsp);
@@ -58,13 +66,14 @@ int hist_wr(data_t *data)
 int hist_rd(data_t *data)
 {
 	struct stat st;
-	ssize_t fdsp, lenrd, flsz = 0;
-	int j, fin = 0, line_cnt = 0;
+	ssize_t fdsp, lenrd, flsz;
+	int j, fin = 0, line_cnt;
 	char *bf = NULL, *fname = hstfile_ftch(data);
 
+	flsz = 0;
+	line_cnt = 0;
 	if (fname == NULL)
 		return (0);
-
 	fdsp = open(fname, O_RDONLY);
 	free(fname);
 	if (fdsp == -1)
@@ -112,11 +121,15 @@ int histlist_build(data_t *data, char *bf, int cnt_line)
 	list_t *nd = NULL;
 
 	if (data->hist)
+	{
 		nd = data->hist;
+	}
 	adnode_atend(&nd, bf, cnt_line);
 
 	if (data->hist == NULL)
+	{
 		data->hist = nd;
+	}
 	return (0);
 }
 
@@ -127,9 +140,10 @@ int histlist_build(data_t *data, char *bf, int cnt_line)
 */
 int hist_recall(data_t *data)
 {
-	int k = 0;
+	int k;
 	list_t *nd = data->hist;
 
+	k = 0;
 	while (nd)
 	{
 		nd->dig = k++;

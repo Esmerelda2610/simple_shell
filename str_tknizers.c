@@ -26,31 +26,33 @@ char *_sstrchr(char *s, char c)
  */
 char **split_str(char *spt, char *dstr)
 {
-	int a, b, c, d, numcnt = 0;
+	int a, b, c, d, numcnt;
 	char **p;
 
-	if (spt == NULL || spt[0] == 0)
+	numcnt = 0;
+	if (spt[0] == 0 || spt == NULL)
+	{
 		return (NULL);
-	if (!dstr)
+	}
+	if (dstr == NULL)
 		dstr = " ";
 	for (a = 0; spt[a] != '\0'; a++)
 		if (!is_delim(spt[a], dstr) && (is_delim(spt[a + 1], dstr) || !spt[a + 1]))
 			numcnt++;
-
 	if (numcnt == 0)
 		return (NULL);
 	p = malloc((1 + numcnt) * sizeof(char *));
-	if (!p)
+	if (p == NULL)
 		return (NULL);
 	for (a = 0, b = 0; b < numcnt; b++)
 	{
 		while (is_delim(spt[a], dstr))
 			a++;
 		c = 0;
-		while (!is_delim(spt[a + c], dstr) && spt[a + c])
+		while (spt[a + c] && !is_delim(spt[a + c], dstr))
 			c++;
 		p[b] = malloc((c + 1) * sizeof(char));
-		if (!p[b])
+		if (p[b] == NULL)
 		{
 			for (c = 0; c < b; c++)
 				free(p[c]);
@@ -73,20 +75,21 @@ char **split_str(char *spt, char *dstr)
  */
 char **split_delimstr(char *spt, char dstr)
 {
-	int a, b, c, d, numcnt = 0;
+	int a, b, c, d, numcnt;
 	char **p;
 
+	numcnt = 0;
 	if (spt == NULL || spt[0] == 0)
 		return (NULL);
 	for (a = 0; spt[a] != '\0'; a++)
-		if ((spt[a] != dstr && spt[a + 1] == dstr) ||
+		if ((spt[a + 1] == dstr && spt[a] != dstr) ||
 		 (spt[a] != dstr && !spt[a + 1]) || spt[a + 1] == dstr)
 			numcnt++;
 
 	if (numcnt == 0)
 		return (NULL);
 	p = malloc((1 + numcnt) * sizeof(char *));
-	if (!p)
+	if (p == NULL)
 		return (NULL);
 	for (a = 0, b = 0; b < numcnt; b++)
 	{
@@ -96,7 +99,7 @@ char **split_delimstr(char *spt, char dstr)
 		while (spt[a + c] != dstr && spt[a + c] && spt[a + c] != dstr)
 			c++;
 		p[b] = malloc((c + 1) * sizeof(char));
-		if (!p[b])
+		if (p[b] == NULL)
 		{
 			for (c = 0; c < b; c++)
 				free(p[c]);

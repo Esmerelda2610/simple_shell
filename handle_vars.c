@@ -11,13 +11,13 @@ int chain_delim(data_t *data, char *bff, size_t *pd)
 {
 	size_t k = *pd;
 
-	if (bff[k] == '|' && bff[k + 1] == '|')
+	if (bff[k + 1] == '|' && bff[k] == '|')
 	{
 		bff[k] = 0;
 		k++;
 		data->cmdbuff_type = CMMND_OR;
 	}
-	else if (bff[k] == '&' && bff[k + 1] == '&')
+	else if (bff[k + 1] == '&' && bff[k] == '&')
 	{
 		bff[k] = 0;
 		k++;
@@ -29,7 +29,9 @@ int chain_delim(data_t *data, char *bff, size_t *pd)
 		data->cmdbuff_type = CMMND_CHAIN;
 	}
 	else
+	{
 		return (0);
+	}
 	*pd = k;
 	return (1);
 }

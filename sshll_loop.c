@@ -8,14 +8,18 @@
 */
 int hsh(data_t *data, char **argvc)
 {
-	ssize_t m = 0;
-	int ret_bltin = 0;
+	ssize_t m;
+	int ret_bltin;
 
+	m = 0;
+	ret_bltin = 0;
 	while (m != -1 && ret_bltin != -2)
 	{
 		clear_feed(data);
 		if (interactive(data))
+		{
 			_sputs("#\033[1;34mLiznJoshell\033[0m$ ");
+		}
 		errputchar(BUFF_FLUSH);
 		m = get_feed(data);
 		if (m != -1)
@@ -26,13 +30,17 @@ int hsh(data_t *data, char **argvc)
 				cmnd_seek(data);
 		}
 		else if (interactive(data))
+		{
 			_sputchar('\n');
+		}
 		free_feed(data, 0);
 	}
 	hist_wr(data);
 	free_feed(data, 1);
 	if (!interactive(data) && data->status)
+	{
 		exit(data->status);
+	}
 	if (ret_bltin == -2)
 	{
 		if (data->err_dig == -1)
@@ -51,6 +59,7 @@ int hsh(data_t *data, char **argvc)
 int bltin_seek(data_t *data)
 {
 	int j, retblt_in = -1;
+
 	tab_shllbuiltin bltin_tbl[] = {
 	    {"exit", shll_exit},
 	    {"env", shll_env},
@@ -91,9 +100,13 @@ void cmnd_seek(data_t *data)
 	}
 	for (j = 0, m = 0; data->arg[j]; j++)
 		if (!is_delim(data->arg[j], "\t\n"))
+		{
 			m++;
+		}
 	if (!m)
+	{
 		return;
+	}
 	path = path_seek(data, shll_getenv(data, "PATH="), data->argv[0]);
 	if (path)
 	{
@@ -102,7 +115,8 @@ void cmnd_seek(data_t *data)
 	}
 	else
 	{
-		if ((interactive(data) || shll_getenv(data, "PATH=") || data->argv[0][0] == '/') && idf_cmnd(data, data->argv[0]))
+		if ((interactive(data) || shll_getenv(data, "PATH=") ||
+			data->argv[0][0] == '/') && idf_cmnd(data, data->argv[0]))
 			cmd_frk(data);
 		else if (*(data->arg) != '\n')
 		{
@@ -135,8 +149,9 @@ void cmd_frk(data_t *data)
 		{
 			free_feed(data, 1);
 			if (errno == EACCES)
-
+			{
 				exit(126);
+			}
 			exit(1);
 
 		}
@@ -148,7 +163,9 @@ void cmd_frk(data_t *data)
 		{
 			data->status = WEXITSTATUS(data->status);
 			if (data->status == 126)
+			{
 				err_print(data, "Permission has been denied\n");
+			}
 		}
 	}
 }
