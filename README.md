@@ -2,7 +2,7 @@
 
 ## Description
 This is an ALX Africa Software Engineering group project for creating a simple UNIX command interpreter. It combines all the concepts learnt
-•	Basics of programming
+-	Basics of programming
 •	Basics of C
 •	Basics of thinking like an engineer
 •	Group work
@@ -16,7 +16,7 @@ All rights reserved.
 The shell was built using `C` programming language and tested on `Ubuntu 20.04 LTS`.
 
 ### Features
-•	Display a prompt and wait for the user to type a command, the command line should always end with a new line.
+-	Display a prompt and wait for the user to type a command, the command line should always end with a new line.
 •	The prompt is displayed again each time a command has been executed.
 •	Print an error meassage if an executable cannot be found.
 •	Handle errors
@@ -33,7 +33,7 @@ The shell was built using `C` programming language and tested on `Ubuntu 20.04 L
 •	Supports the history feature and file input
 
 ### Inbuilt Commands
-`ls` list of files within the directory
+- `ls` list of files within the directory
 `exit` Exits the shell with optional exit status
 `env` Prints the environment
 `alias` sets, reads, unset and replaces aliases
@@ -43,10 +43,10 @@ The shell was built using `C` programming language and tested on `Ubuntu 20.04 L
 `unsetenv` unsets the environment variable
 
 ### Contributors
-•	Elizabeth Motsinone
-•	Joshua Mutuse
+-	Elizabeth Motsinone
+	Joshua Mutuse
 
 ## **Collaborators**
-[Elizabeth Motsinone](mahlatsemotsinone@gmail.com)
-[Joshua Mutuse](joshkm@gmail.com)
+- [Elizabeth Motsinone](mahlatsemotsinone@gmail.com)
+- [Joshua Mutuse](joshkm@gmail.com)
 
