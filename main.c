@@ -6,7 +6,7 @@
  * @arv: the argument vector
  * Return: error 1, 0 success
 */
-int main(int arc, char **arv)
+int main(int ac, char **av)
 {
 	data_t data[] = { DATA_INIT };
 	int f;
@@ -17,9 +17,9 @@ int main(int arc, char **arv)
 	    : "=r" (f)
 	    : "r" (f));
 
-	if (arc == 2)
+	if (ac == 2)
 	{
-		f = open(arv[1], O_RDONLY);
+		f = open(av[1], O_RDONLY);
 		if (f == -1)
 		{
 			if (errno == EACCES)
@@ -28,9 +28,9 @@ int main(int arc, char **arv)
 			}
 			if (errno == ENOENT)
 			{
-				_errputs(arv[0]);
+				_errputs(av[0]);
 				_errputs(": 0: Unable to open ");
-				_errputs(arv[1]);
+				_errputs(av[1]);
 				errputchar('\n');
 				errputchar(BUFF_FLUSH);
 				exit(127);
@@ -41,6 +41,6 @@ int main(int arc, char **arv)
 	}
 	envlist_populate(data);
 	hist_rd(data);
-	hsh(data, arv);
+	hsh(data, av);
 	return (EXIT_SUCCESS);
 }
