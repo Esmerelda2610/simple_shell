@@ -1,6 +1,19 @@
 #ifndef SHLL_H
 #define SHLL_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <limits.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <stdbool.h>
+#include <signal.h>
+
 /*Authors Joshua Mutuse and Elizabeth Motsinone*/
 
 /*handle arguments*/
@@ -29,19 +42,6 @@
 #define USE_STRTOK 0
 #define FILE_HSTR ".simple_shell_history"
 #define MAX_HSTR 4096
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <limits.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <stdbool.h>
-#include <signal.h>
 
 extern char **environ;
 
