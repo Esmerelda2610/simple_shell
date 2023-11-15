@@ -89,13 +89,14 @@ typedef struct shll_data
 	unsigned int line_ct;
 	int err_dig;
 	int line_ctflags;
-	char **environ;
-	list_t *alias;
-	list_t *hist;
+	char *fname;
 	list_t *envir;
-	char *pname;
+	list_t *hist;
+	list_t *alias;
+	char **environ;
 	int envir_chngd;
 	int status;
+
 	char **cmdbuff;
 	int cmdbuff_type;
 	int rd_fd;
