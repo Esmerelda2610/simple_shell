@@ -42,7 +42,7 @@ void *shll_realloc(void *p, unsigned int old, unsigned int new)
 {
 	char *pns;
 
-	if (p == NULL)
+	if (!p)
 	{
 		return (malloc(new));
 	}

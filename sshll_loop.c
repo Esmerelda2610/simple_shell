@@ -8,11 +8,9 @@
 */
 int hsh(data_t *data, char **argvc)
 {
-	ssize_t m;
-	int ret_bltin;
+	ssize_t m = 0;
+	int ret_bltin = 0;
 
-	m = 0;
-	ret_bltin = 0;
 	while (m != -1 && ret_bltin != -2)
 	{
 		clear_feed(data);
@@ -115,8 +113,8 @@ void cmnd_seek(data_t *data)
 	}
 	else
 	{
-		if ((interactive(data) || shll_getenv(data, "PATH=") ||
-			data->argv[0][0] == '/') && idf_cmnd(data, data->argv[0]))
+		if ((interactive(data) || shll_getenv(data, "PATH=")
+			|| data->argv[0][0] == '/') && idf_cmnd(data, data->argv[0]))
 			cmd_frk(data);
 		else if (*(data->arg) != '\n')
 		{

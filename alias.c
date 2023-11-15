@@ -8,18 +8,18 @@
  */
 int rmv_alias(data_t *data, char *s)
 {
-	int rtrn;
 	char *b, d;
+	int rtrn;
 
 	b = _sstrchr(s, '=');
-	if (b == NULL)
+	if (!b)
 	{
 		return (1);
 	}
 	d = *b;
 	*b = 0;
 	rtrn = delnode_atindx(&(data->alias),
-			      getnode_indx(data->alias, initial_node(data->alias, s, -1)));
+		getnode_indx(data->alias, initial_node(data->alias, s, -1)));
 	*b = d;
 	return (rtrn);
 }

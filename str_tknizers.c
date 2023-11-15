@@ -34,7 +34,7 @@ char **split_str(char *spt, char *dstr)
 	{
 		return (NULL);
 	}
-	if (dstr == NULL)
+	if (!dstr)
 		dstr = " ";
 	for (a = 0; spt[a] != '\0'; a++)
 		if (!is_delim(spt[a], dstr) && (is_delim(spt[a + 1], dstr) || !spt[a + 1]))
@@ -42,17 +42,17 @@ char **split_str(char *spt, char *dstr)
 	if (numcnt == 0)
 		return (NULL);
 	p = malloc((1 + numcnt) * sizeof(char *));
-	if (p == NULL)
+	if (!p)
 		return (NULL);
 	for (a = 0, b = 0; b < numcnt; b++)
 	{
 		while (is_delim(spt[a], dstr))
 			a++;
 		c = 0;
-		while (spt[a + c] && !is_delim(spt[a + c], dstr))
+		while (!is_delim(spt[a + c], dstr) && spt[a + c])
 			c++;
 		p[b] = malloc((c + 1) * sizeof(char));
-		if (p[b] == NULL)
+		if (!p[b])
 		{
 			for (c = 0; c < b; c++)
 				free(p[c]);
@@ -89,7 +89,7 @@ char **split_delimstr(char *spt, char dstr)
 	if (numcnt == 0)
 		return (NULL);
 	p = malloc((1 + numcnt) * sizeof(char *));
-	if (p == NULL)
+	if (!p)
 		return (NULL);
 	for (a = 0, b = 0; b < numcnt; b++)
 	{
@@ -99,7 +99,7 @@ char **split_delimstr(char *spt, char dstr)
 		while (spt[a + c] != dstr && spt[a + c] && spt[a + c] != dstr)
 			c++;
 		p[b] = malloc((c + 1) * sizeof(char));
-		if (p[b] == NULL)
+		if (!p[b])
 		{
 			for (c = 0; c < b; c++)
 				free(p[c]);

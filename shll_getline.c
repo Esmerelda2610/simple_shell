@@ -9,11 +9,9 @@
 */
 ssize_t buffeed(data_t *data, char **bff, size_t *length)
 {
-	size_t m;
-	size_t ln_p;
+	size_t m = 0;
+	size_t ln_p = 0;
 
-	m = 0;
-	ln_p = 0;
 	if (!*length)
 	{
 		free(*bff);

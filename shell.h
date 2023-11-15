@@ -96,11 +96,10 @@ typedef struct shll_data
 	char *pname;
 	int envir_chngd;
 	int status;
-
 	char **cmdbuff;
+	int cmdbuff_type;
 	int rd_fd;
 	int hist_ct;
-	int cmdbuff_type;
 } data_t;
 
 #define DATA_INIT \
@@ -128,6 +127,8 @@ void cmd_frk(data_t *data);
 int idf_cmnd(data_t *data, char *path);
 char *chardup(char *ptstr, int bgn, int end);
 char *path_seek(data_t *data, char *ptstr, char *cmnd);
+
+int main(int arc, char **arv);
 
 /*error functions*/
 void _errputs(char *s);

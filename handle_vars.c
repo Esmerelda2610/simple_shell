@@ -46,9 +46,7 @@ int chain_delim(data_t *data, char *bff, size_t *pd)
  */
 void chk_chain(data_t *data, char *bff, size_t *b, size_t j, size_t length)
 {
-	size_t k;
-
-	k = *b;
+	size_t k = *b;
 
 	if (data->cmdbuff_type == CMMND_AND)
 	{
@@ -106,9 +104,7 @@ int chng_alias(data_t *data)
 int intchnge_vars(data_t *data)
 {
 	list_t *nd;
-	int k;
-
-	k = 0;
+	int k = 0;
 
 	for (k = 0; data->argv[k]; k++)
 	{

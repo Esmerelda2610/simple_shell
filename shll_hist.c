@@ -66,13 +66,12 @@ int hist_wr(data_t *data)
 int hist_rd(data_t *data)
 {
 	struct stat st;
-	ssize_t fdsp, lenrd, flsz;
-	int j, fin = 0, line_cnt;
+	ssize_t fdsp, lenrd, flsz = 0;
+	int j, fin = 0, line_cnt = 0;
 	char *bf = NULL, *fname = hstfile_ftch(data);
 
-	flsz = 0;
-	line_cnt = 0;
-	if (fname == NULL)
+
+	if (!fname)
 		return (0);
 	fdsp = open(fname, O_RDONLY);
 	free(fname);

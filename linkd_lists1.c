@@ -89,9 +89,8 @@ size_t list_prnt(const list_t *head)
  */
 list_t *initial_node(list_t *nd, char *prx, char t)
 {
-	char *d;
+	char *d = NULL;
 
-	d = NULL;
 	while (nd != NULL)
 	{
 		d = pre_substr(nd->str, prx);

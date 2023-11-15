@@ -7,11 +7,9 @@
 */
 int atoi_errs(char *strn)
 {
-	int k;
-	unsigned long int res;
+	int k = 0;
+	unsigned long int res = 0;
 
-	res = 0;
-	k = 0;
 	if (*strn == '+')
 		strn++;
 	for (k = 0; strn[k] != '\0'; k++)
@@ -55,10 +53,9 @@ void err_print(data_t *data, char *strerr)
 int deci_print(int feed, int fd)
 {
 	int (*__sputchar)(char) = _sputchar;
-	int j, cnt;
+	int j, cnt = 0;
 	unsigned int _abs_, curr;
 
-	cnt = 0;
 	if (fd == STDERR_FILENO)
 	{
 		__sputchar = errputchar;
@@ -99,13 +96,11 @@ int deci_print(int feed, int fd)
 char *digit_convrt(long int digi, int nbase, int flgs)
 {
 	char *p;
-	char sgn;
-	unsigned long n;
+	char sgn = 0;
+	unsigned long n = digi;
 	static char *arr;
 	static char buf[50];
 
-	n = digi;
-	sgn = 0;
 	if (!(flgs & CONVERT_UNSGNED) && digi < 0)
 	{
 		n = -digi;

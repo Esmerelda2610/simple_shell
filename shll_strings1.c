@@ -9,9 +9,8 @@
 char *_sstrdup(const char *s)
 {
 	char *dup;
-	int lgth;
+	int lgth = 0;
 
-	lgth = 0;
 	if (s == NULL)
 	{
 		return (NULL);
@@ -22,7 +21,7 @@ char *_sstrdup(const char *s)
 	}
 	dup = malloc(sizeof(char) * (lgth + 1));
 
-	if (dup == NULL)
+	if (!dup)
 	{
 		return (NULL);
 	}
@@ -45,7 +44,7 @@ void _sputs(char *s)
 	int k;
 
 	k = 0;
-	if (s == NULL)
+	if (!s)
 	{
 		return;
 	}
@@ -67,7 +66,7 @@ int _sputchar(char c)
 	static int j;
 	static char buff[WRT_BUFF_SIZE];
 
-	if (j >= WRT_BUFF_SIZE || c == BUFF_FLUSH)
+	if (c == BUFF_FLUSH || j >= WRT_BUFF_SIZE)
 	{
 		write(1, buff, j);
 		j = 0;
