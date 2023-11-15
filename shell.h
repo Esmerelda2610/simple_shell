@@ -82,18 +82,18 @@ typedef struct list_str
  */
 typedef struct shll_data
 {
-	char **argv;
 	char *arg;
+	char **argv;
 	char *path;
 	int argc;
 	unsigned int line_ct;
 	int err_dig;
 	int line_ctflags;
-	char *fname;
-	list_t *envir;
-	list_t *hist;
-	list_t *alias;
 	char **environ;
+	list_t *alias;
+	list_t *hist;
+	list_t *envir;
+	char *pname;
 	int envir_chngd;
 	int status;
 
