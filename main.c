@@ -2,8 +2,8 @@
 
 /**
  * main - Entry point
- * @arc: the count of arguments
- * @arv: the argument vector
+ * @ac: the count of arguments
+ * @av: the argument vector
  * Return: error 1, 0 success
 */
 int main(int ac, char **av)
