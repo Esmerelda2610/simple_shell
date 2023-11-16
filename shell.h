@@ -1,6 +1,8 @@
 #ifndef SHLL_H
 #define SHLL_H
 
+#define _DEFAULT_SOURCE 1
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

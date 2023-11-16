@@ -16,7 +16,7 @@ int idf_cmnd(data_t *data, char *path)
 		return (0);
 	}
 
-	if (st.st_mode & __S_IFREG)
+	if (st.st_mode & S_IFREG)
 	{
 		return (1);
 	}
