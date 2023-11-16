@@ -23,9 +23,9 @@ int chain_delim(data_t *data, char *bff, size_t *pd)
 		k++;
 		data->cmdbuff_type = CMMND_AND;
 	}
-	else if (bff[k] == ';')
+	else if (bff[k] == ';') /*end of command*/
 	{
-		bff[k] = 0;
+		bff[k] = 0; /*null replaces semicolon*/
 		data->cmdbuff_type = CMMND_CHAIN;
 	}
 	else
@@ -81,14 +81,14 @@ int chng_alias(data_t *data)
 	for (j = 0; j < 10; j++)
 	{
 		nd = initial_node(data->alias, data->argv[0], '=');
-		if (nd == NULL)
+		if (!nd)
 			return (0);
 		free(data->argv[0]);
 		b = _sstrchr(nd->str, '=');
-		if (b == NULL)
+		if (!b)
 			return (0);
 		b = _sstrdup(b + 1);
-		if (b == NULL)
+		if (!b)
 			return (0);
 		data->argv[0] = b;
 	}
@@ -113,20 +113,20 @@ int intchnge_vars(data_t *data)
 		if (!_sstrcmp(data->argv[k], "$?"))
 		{
 			intchnge_str(&(data->argv[k]),
-				     _sstrdup(digit_convrt(data->status, 10, 0)));
+				 _sstrdup(digit_convrt(data->status, 10, 0)));
 			continue;
 		}
 		if (!_sstrcmp(data->argv[k], "$$"))
 		{
 			intchnge_str(&(data->argv[k]),
-				     _sstrdup(digit_convrt(getpid(), 10, 0)));
+				_sstrdup(digit_convrt(getpid(), 10, 0)));
 			continue;
 		}
 		nd = initial_node(data->envir, &data->argv[k][1], '=');
-		if (nd != NULL)
+		if (nd)
 		{
 			intchnge_str(&(data->argv[k]),
-				     _sstrdup(_sstrchr(nd->str, '=') + 1));
+				 _sstrdup(_sstrchr(nd->str, '=') + 1));
 			continue;
 		}
 		intchnge_str(&data->argv[k], _sstrdup(""));

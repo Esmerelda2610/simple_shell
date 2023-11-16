@@ -32,7 +32,7 @@ int shunset_env(data_t *data, char *v)
 	if (!nd || !v)
 		return (0);
 
-	while (nd != NULL)
+	while (nd)
 	{
 		j = pre_substr(nd->str, v);
 		if (j && *j == '=')
@@ -71,7 +71,7 @@ int shset_env(data_t *data, char *v, char *val)
 	_sstrcat(bff, "=");
 	_sstrcat(bff, val);
 	nde = data->envir;
-	while (!nde)
+	while (nde)
 	{
 		b = pre_substr(nde->str, v);
 		if (b && *b == '=')
