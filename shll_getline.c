@@ -128,11 +128,9 @@ int shll_getline(data_t *data, char **p, size_t *len)
 	static char buff[RD_BUFF_SIZE];
 	static size_t m, ln;
 	size_t j;
-	ssize_t a, b;
+	ssize_t a = 0, b = 0;
 	char *t = NULL, *neo_b = NULL, *d;
 
-	b = 0;
-	a = 0;
 	t = *p;
 	if (t && len)
 	{
@@ -146,9 +144,9 @@ int shll_getline(data_t *data, char **p, size_t *len)
 	d = _sstrchr(buff + m, '\n');
 	j = d ? 1 + (unsigned int)(d - buff) : ln;
 	neo_b = shll_realloc(t, b, b ? b + j : j + 1);
-	if (neo_b == NULL)
+	if (!neo_b) /*if memory alloc fails*/
 		return (t ? free(t), -1 : -1);
-	if (b)
+	if (b) /*if memory is allocated*/
 	{
 		_sstrncat(neo_b, buff + m, j - m);
 	}
