@@ -105,7 +105,7 @@ typedef struct shll_data
 
 #define DATA_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-	0, 0, 0}
+	0, 0, 0} \
 
 /**
  * struct shll_builtin - builtin strings with functions
@@ -130,6 +130,7 @@ char *chardup(char *ptstr, int bgn, int end);
 char *path_seek(data_t *data, char *ptstr, char *cmnd);
 
 int main(int arc, char **arv);
+int loophsh(char **args);
 
 /*error functions*/
 void _errputs(char *s);
