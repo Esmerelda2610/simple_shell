@@ -34,10 +34,8 @@ int idf_cmnd(data_t *data, char *path)
 char *chardup(char *ptstr, int bgn, int end)
 {
 	static char buffer[1024];
-	int j, m;
+	int j = 0, m = 0;
 
-	m = 0;
-	j = 0;
 	for (m = 0, j = bgn; j < end; j++)
 	{
 		if (ptstr[j] != ':')
@@ -58,12 +56,10 @@ char *chardup(char *ptstr, int bgn, int end)
 */
 char *path_seek(data_t *data, char *ptstr, char *cmnd)
 {
-	int k, cmd_pos;
+	int k = 0, cmd_pos = 0;
 	char *path;
 
-	cmd_pos = 0;
-	k = 0;
-	if (ptstr == NULL)
+	if (!ptstr)
 	{
 		return (NULL);
 	}

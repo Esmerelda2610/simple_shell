@@ -9,7 +9,7 @@
 */
 ssize_t buffeed(data_t *data, char **bff, size_t *length)
 {
-	size_t m = 0;
+	ssize_t m = 0;
 	size_t ln_p = 0;
 
 	if (!*length)
@@ -18,13 +18,9 @@ ssize_t buffeed(data_t *data, char **bff, size_t *length)
 		*bff = NULL;
 		signal(SIGINT, handle_sigint);
 #if USE_GETLINE
-{
 		m = getline(bff, &ln_p, stdin);
-}
 #else
-{
 		m = shll_getline(data, bff, &ln_p);
-}
 #endif
 		if (m > 0)
 		{
