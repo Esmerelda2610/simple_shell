@@ -34,20 +34,20 @@ int shll_exit(data_t *data)
  */
 int shll_cd(data_t *data)
 {
-	char *p, *d, buf[1024];
+	char *p, *dir, buf[1024];
 	int retchng_dir;
 
 	p = getcwd(buf, 1024);
-	if (p == NULL)
+	if (!p)
 		_sputs("cwd failure msg\n");
 	if (!data->argv[1])
 	{
-		d = shll_getenv(data, "HOME=");
-		if (d == NULL)
+		dir = shll_getenv(data, "HOME=");
+		if (!dir)
 			retchng_dir =
-			    chdir((d = shll_getenv(data, "PWD=")) ? d : "/");
+			    chdir((dir = shll_getenv(data, "PWD=")) ? dir : "/");
 		else
-			retchng_dir = chdir(d);
+			retchng_dir = chdir(dir);
 	}
 	else if (_sstrcmp(data->argv[1], "-") == 0)
 	{
@@ -59,7 +59,7 @@ int shll_cd(data_t *data)
 		}
 		_sputs(shll_getenv(data, "OLDPWD=")), _sputchar('\n');
 		retchng_dir =
-		    chdir((d = shll_getenv(data, "OLDPWD=")) ? d : "/");
+		    chdir((dir = shll_getenv(data, "OLDPWD=")) ? dir : "/");
 	}
 	else
 		retchng_dir = chdir(data->argv[1]);
