@@ -133,15 +133,15 @@ void cmnd_seek(data_t *data)
 */
 void cmd_frk(data_t *data)
 {
-	pid_t pid_ch;
+	pid_t child_pid;
 
-	pid_ch = fork();
-	if (pid_ch == -1)
+	child_pid = fork();
+	if (child_pid == -1)
 	{
 		perror("Error: ");
 		return;
 	}
-	if (pid_ch == 0)
+	if (child_pid == 0)
 	{
 		if (execve(data->path, data->argv, shget_env(data)) == -1)
 		{
