@@ -10,7 +10,7 @@ size_t lenof_list(const list_t *head)
 	size_t k;
 
 	k = 0;
-	while (head != NULL)
+	while (!head)
 	{
 		head = head->nxt;
 		k++;
@@ -36,14 +36,14 @@ char **convlist_2str(list_t *hd)
 		return (NULL);
 	}
 	sts = malloc(sizeof(char *) * (m + 1));
-	if (sts == NULL)
+	if (!sts)
 	{
 		return (NULL);
 	}
 	for (m = 0; nde; nde = nde->nxt, m++)
 	{
 		s = malloc(_sstrlen(nde->str) + 1);
-		if (s == NULL)
+		if (!s)
 		{
 			for (k = 0; k < m; k++)
 				free(sts[k]);
@@ -67,7 +67,7 @@ size_t list_prnt(const list_t *head)
 	size_t m;
 
 	m = 0;
-	while (head != NULL)
+	while (!head)
 	{
 		_sputs(digit_convrt(head->dig, 10, 0));
 		_sputchar(':');
@@ -77,7 +77,7 @@ size_t list_prnt(const list_t *head)
 		head = head->nxt;
 		m++;
 	}
-	return (1);
+	return (m);
 }
 
 /**
@@ -91,7 +91,7 @@ list_t *initial_node(list_t *nd, char *prx, char t)
 {
 	char *d = NULL;
 
-	while (nd != NULL)
+	while (!nd)
 	{
 		d = pre_substr(nd->str, prx);
 		if (d && ((t == -1) || (*d == t)))
@@ -114,7 +114,7 @@ ssize_t getnode_indx(list_t *h, list_t *nd)
 	size_t k;
 
 	k = 0;
-	while (h != NULL)
+	while (h)
 	{
 		if (h == nd)
 		{

@@ -11,12 +11,12 @@ list_t *adnode(list_t **h, const char *s, int digi)
 {
 	list_t *new_h;
 
-	if (h == NULL)
+	if (!h)
 	{
 		return (NULL);
 	}
 	new_h = malloc(sizeof(list_t));
-	if (new_h == NULL)
+	if (!new_h)
 	{
 		return (NULL);
 	}
@@ -25,7 +25,7 @@ list_t *adnode(list_t **h, const char *s, int digi)
 	if (s)
 	{
 		new_h->str = _sstrdup(s);
-		if (new_h->str == NULL)
+		if (!new_h->str)
 		{
 			free(new_h);
 			return (NULL);
@@ -47,14 +47,14 @@ list_t *adnode_atend(list_t **h, const char *s, int digi)
 {
 	list_t *new_nd, *nd;
 
-	if (h == NULL)
+	if (!h)
 	{
 		return (NULL);
 	}
 
 	nd = *h;
 	new_nd = malloc(sizeof(list_t));
-	if (new_nd == NULL)
+	if (!new_nd)
 	{
 		return (NULL);
 	}
@@ -63,7 +63,7 @@ list_t *adnode_atend(list_t **h, const char *s, int digi)
 	if (s)
 	{
 		new_nd->str = _sstrdup(s);
-		if (new_nd->str == NULL)
+		if (!new_nd->str)
 		{
 			free(new_nd);
 			return (NULL);
