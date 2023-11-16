@@ -91,7 +91,7 @@ list_t *initial_node(list_t *nd, char *prx, char t)
 {
 	char *d = NULL;
 
-	while (!nd)
+	while (nd)
 	{
 		d = pre_substr(nd->str, prx);
 		if (d && ((t == -1) || (*d == t)))
