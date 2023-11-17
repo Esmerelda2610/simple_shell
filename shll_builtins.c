@@ -15,7 +15,7 @@ int shll_exit(data_t *data)
 		if (chk_exit == -1)
 		{
 			data->status = 2;
-			err_print(data, "Number unknown: ");
+			err_print(data, "Illegal number: ");
 			_errputs(data->argv[1]);
 			errputchar('\n');
 			return (1);

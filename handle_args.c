@@ -110,7 +110,7 @@ char *digit_convrt(long int digi, int nbase, int flgs)
 	p = &buf[49];
 	*p = '\0';
 
-	do {
+	do	 {
 		*--p = arr[n % nbase];
 		n /= nbase;
 	} while (n != 0);
