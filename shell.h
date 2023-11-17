@@ -38,8 +38,8 @@
 #define CMD_AND 2
 #define CMD_CHAIN 3
 
-#define CONVERT_LCASE 1
-#define CONVERT_UNSGNED 2
+#define CONVERT_LOWERCASE 1
+#define CONVERT_UNSIGNED 2
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 #define FILE_HSTR ".simple_shell_history"
