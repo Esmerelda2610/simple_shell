@@ -97,7 +97,7 @@ void cmnd_seek(data_t *data)
 		data->line_ctflags = 0;
 	}
 	for (j = 0, m = 0; data->arg[j]; j++)
-		if (!is_delim(data->arg[j], "\t\n"))
+		if (!is_delim(data->arg[j], " \t\n"))
 		{
 			m++;
 		}
