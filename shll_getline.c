@@ -26,7 +26,7 @@ ssize_t buffeed(data_t *data, char **bff, size_t *length)
 		{
 			if ((*bff)[m - 1] == '\n')
 			{
-				(*bff)[m - 1] = '\0';
+				(*bff)[m - 1] = '\0'; /*trailing newline removed*/
 				m--;
 			}
 			data->line_ctflags = 1;
@@ -54,9 +54,10 @@ ssize_t get_feed(data_t *data)
 	char **buffp = &(data->arg), *b;
 
 	n = 0;
+
 	_sputchar(BUFF_FLUSH);
 	n = buffeed(data, &buff, &length);
-	if (n == -1)
+	if (n == -1) /*End Of File*/
 	{
 		return (-1);
 	}
@@ -81,10 +82,10 @@ ssize_t get_feed(data_t *data)
 			data->cmdbuff_type = CMD_NORM;
 		}
 		*buffp = b;
-		return (_sstrlen(b));
+		return (_sstrlen(b)); /*length of curr cmd returned*/
 	}
 	*buffp = buff;
-	return (n);
+	return (n); /*length of buffer returned from shll_getline*/
 }
 
 /**
@@ -164,7 +165,7 @@ int shll_getline(data_t *data, char **p, size_t *len)
  * @sig_digi: a digit signal
  * Return: void
  */
-void handle_sigint(__attribute__((unused)) int sig_digi)
+void handle_sigint(__attribute__((unused))int sig_digi)
 {
 	_sputs("\n");
 	_sputs("Liz&Josh$ ");
