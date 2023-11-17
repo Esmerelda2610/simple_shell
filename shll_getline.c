@@ -78,7 +78,7 @@ ssize_t get_feed(data_t *data)
 		if (k >= length)
 		{
 			k = length = 0;
-			data->cmdbuff_type = CMMND_NORM;
+			data->cmdbuff_type = CMD_NORM;
 		}
 		*buffp = b;
 		return (_sstrlen(b));
