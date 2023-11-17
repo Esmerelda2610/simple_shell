@@ -119,7 +119,7 @@ void cmnd_seek(data_t *data)
 		else if (*(data->arg) != '\n')
 		{
 			data->status = 127;
-			err_print(data, "Path not found\n");
+			err_print(data, "not found\n");
 		}
 	}
 }

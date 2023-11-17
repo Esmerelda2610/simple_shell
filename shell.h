@@ -203,11 +203,11 @@ void set_feed(data_t *data, char **argvc);
 void free_feed(data_t *data, int fields);
 
 /*set unset env*/
-char *shll_getenv(data_t *data, const char *nm);
 int shll_env(data_t *data);
+char *shll_getenv(data_t *data, const char *nm);
 int shll_setenv(data_t *data);
-int envlist_populate(data_t *data);
 int shllunset_env(data_t *data);
+int envlist_populate(data_t *data);
 
 /*print env*/
 char **shget_env(data_t *data);
