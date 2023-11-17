@@ -104,7 +104,7 @@ ssize_t bufread(data_t *data, char *bff, size_t *j)
 	{
 		return (0);
 	}
-	m = read(data->rd_fd, bff, RD_BUFF_SIZE);
+	m = read(data->rd_fd, bff, READ_BUFF_SIZE);
 	if (m >= 0)
 	{
 		*j = m;
@@ -122,7 +122,7 @@ ssize_t bufread(data_t *data, char *bff, size_t *j)
 int shll_getline(data_t *data, char **p, size_t *len)
 {
 
-	static char buff[RD_BUFF_SIZE];
+	static char buff[READ_BUFF_SIZE];
 	static size_t m, ln;
 	size_t j;
 	ssize_t a = 0, b = 0;

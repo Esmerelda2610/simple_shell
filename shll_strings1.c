@@ -64,9 +64,9 @@ void _sputs(char *s)
 int _sputchar(char c)
 {
 	static int j;
-	static char buff[WRT_BUFF_SIZE];
+	static char buff[WRITE_BUFF_SIZE];
 
-	if (c == BUFF_FLUSH || j >= WRT_BUFF_SIZE)
+	if (c == BUFF_FLUSH || j >= WRITE_BUFF_SIZE)
 	{
 		write(1, buff, j);
 		j = 0;

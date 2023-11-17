@@ -24,8 +24,8 @@
 
 /*buffers*/
 #define BUFFER_SIZE 1024
-#define RD_BUFF_SIZE 1024
-#define WRT_BUFF_SIZE 1024
+#define READ_BUFF_SIZE 1024
+#define WRITE_BUFF_SIZE 1024
 #define BUFF_FLUSH -1
 
 /*aliases*/

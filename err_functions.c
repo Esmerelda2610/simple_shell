@@ -10,7 +10,7 @@ void _errputs(char *s)
 	int k;
 
 	k = 0;
-	if (s == NULL)
+	if (!s)
 	{
 		return;
 	}
@@ -28,10 +28,10 @@ void _errputs(char *s)
 */
 int errputchar(char c)
 {
-	static char buff[WRT_BUFF_SIZE];
+	static char buff[WRITE_BUFF_SIZE];
 	static int j;
 
-	if (c == BUFF_FLUSH || j >= WRT_BUFF_SIZE)
+	if (c == BUFF_FLUSH || j >= WRITE_BUFF_SIZE)
 	{
 		write(2, buff, j);
 		j = 0;
@@ -51,10 +51,10 @@ int errputchar(char c)
 */
 int _sputs_fd(char c, int fd)
 {
-	static char buff[WRT_BUFF_SIZE];
+	static char buff[WRITE_BUFF_SIZE];
 	static int j;
 
-	if (c == BUFF_FLUSH || j >= WRT_BUFF_SIZE)
+	if (c == BUFF_FLUSH || j >= WRITE_BUFF_SIZE)
 	{
 		write(fd, buff, j);
 		j = 0;
