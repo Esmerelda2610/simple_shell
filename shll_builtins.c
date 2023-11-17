@@ -65,7 +65,7 @@ int shll_cd(data_t *data)
 		retchng_dir = chdir(data->argv[1]);
 	if (retchng_dir == -1)
 	{
-		err_print(data, "Cannot CD into ");
+		err_print(data, "Can't cd to ");
 		_errputs(data->argv[1]), errputchar('\n');
 	}
 	else

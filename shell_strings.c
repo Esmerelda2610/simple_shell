@@ -48,7 +48,6 @@ int _sstrcmp(char *str1, char *str2)
  * @sub_str: the substring searched for
  * Return: the address of the character after str, otherwise NULL
 */
-
 char *pre_substr(const char *str, const char *sub_str)
 {
 	while (*sub_str)
@@ -63,7 +62,6 @@ char *pre_substr(const char *str, const char *sub_str)
  * @src: the buffer source
  * Return: a pointer to the buffer destination
 */
-
 char *_sstrcat(char *des, char *src)
 {
 	char *ptr = des;
