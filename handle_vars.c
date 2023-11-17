@@ -15,18 +15,18 @@ int chain_delim(data_t *data, char *bff, size_t *pd)
 	{
 		bff[k] = 0;
 		k++;
-		data->cmdbuff_type = CMMND_OR;
+		data->cmdbuff_type = CMD_OR;
 	}
 	else if (bff[k + 1] == '&' && bff[k] == '&')
 	{
 		bff[k] = 0;
 		k++;
-		data->cmdbuff_type = CMMND_AND;
+		data->cmdbuff_type = CMD_AND;
 	}
 	else if (bff[k] == ';') /*end of command*/
 	{
 		bff[k] = 0; /*null replaces semicolon*/
-		data->cmdbuff_type = CMMND_CHAIN;
+		data->cmdbuff_type = CMD_CHAIN;
 	}
 	else
 	{
@@ -48,7 +48,7 @@ void chk_chain(data_t *data, char *bff, size_t *b, size_t j, size_t length)
 {
 	size_t k = *b;
 
-	if (data->cmdbuff_type == CMMND_AND)
+	if (data->cmdbuff_type == CMD_AND)
 	{
 		if (data->status)
 		{
@@ -56,7 +56,7 @@ void chk_chain(data_t *data, char *bff, size_t *b, size_t j, size_t length)
 			k = length;
 		}
 	}
-	if (data->cmdbuff_type == CMMND_OR)
+	if (data->cmdbuff_type == CMD_OR)
 	{
 		if (!data->status)
 		{
@@ -74,9 +74,9 @@ void chk_chain(data_t *data, char *bff, size_t *b, size_t j, size_t length)
 */
 int chng_alias(data_t *data)
 {
+	int j;
 	list_t *nd;
 	char *b;
-	int j;
 
 	for (j = 0; j < 10; j++)
 	{

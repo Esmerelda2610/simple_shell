@@ -33,10 +33,10 @@
 
 /*variables*/
 #define MAX_COMMAND 1024
-#define CMMND_NORM 0
-#define CMMND_OR 1
-#define CMMND_AND 2
-#define CMMND_CHAIN 3
+#define CMD_NORM 0
+#define CMD_OR 1
+#define CMD_AND 2
+#define CMD_CHAIN 3
 
 #define CONVERT_LCASE 1
 #define CONVERT_UNSGNED 2
