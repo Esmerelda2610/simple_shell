@@ -132,7 +132,7 @@ void detach_comments(char *bff)
 	int j;
 
 	for (j = 0; bff[j] != '\0'; j++)
-		if ((!j || bff[j - 1] == ' ') && bff[j] == '#')
+		if (bff[j] == '#' && (!j || bff[j - 1] == ' '))
 		{
 			bff[j] = '\0';
 			break;

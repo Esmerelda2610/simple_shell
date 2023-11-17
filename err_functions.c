@@ -16,7 +16,7 @@ void _errputs(char *s)
 	}
 	while (s[k] != '\0')
 	{
-		_sputchar(s[k]);
+		errputchar(s[k]);
 		s++;
 	}
 }
@@ -76,7 +76,7 @@ int _putstrfd(char *s, int fd)
 {
 	int j;
 
-	if (s == NULL)
+	if (!s)
 	{
 		return (0);
 	}
