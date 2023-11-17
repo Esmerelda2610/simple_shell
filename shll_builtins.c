@@ -51,7 +51,7 @@ int shll_cd(data_t *data)
 	}
 	else if (_sstrcmp(data->argv[1], "-") == 0)
 	{
-		if (shll_getenv(data, "OLDPWD=") == NULL)
+		if (!shll_getenv(data, "OLDPWD="))
 		{
 			_sputs(p);
 			_sputchar('\n');
@@ -65,7 +65,7 @@ int shll_cd(data_t *data)
 		retchng_dir = chdir(data->argv[1]);
 	if (retchng_dir == -1)
 	{
-		err_print(data, "Can't cd to ");
+		err_print(data, "can't cd to ");
 		_errputs(data->argv[1]), errputchar('\n');
 	}
 	else
